@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Gardenia&#39;s Blog</title>
+    <title>递归与分治 · Gardenia&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">Gardenia&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">递归与分治</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">Gardenia's Blog</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            递归与分治
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="算法">算法</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">227</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/11/04</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,68 +399,49 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/04/递归与分治/">
-            
-                <span>递归与分治</span>
-        </a>
-        <div class="abstract-content">
-            12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;using namespace std;long long a=1000000007;int fabi(int n)&#123;	if(n==0)	&#123;		return 0;	&#125;	else if(n==1||n==2)	&#123;		return n;	&#125;	int target=0;	int form1=1;	int form2=2;	else	&#123;		for(int i=3...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="算法">算法</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">long long a=1000000007;</span><br><span class="line">int fabi(int n)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==0)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">return</span> 0;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(n==1||n==2)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">return</span> n;</span><br><span class="line">	&#125;</span><br><span class="line">	int target=0;</span><br><span class="line">	int form1=1;</span><br><span class="line">	int form2=2;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(int i=3;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			target=(form1%a+form2%a)%a;</span><br><span class="line">			form1=form2;</span><br><span class="line">			form2=target;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N;</span><br><span class="line">	<span class="keyword">while</span>(cin&gt;&gt;N)</span><br><span class="line">	&#123;</span><br><span class="line">		int ans=fabi(N);</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include&lt;cmath&gt;</span></span><br><span class="line"><span class="comment">#include&lt;iomanip&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	<span class="keyword">while</span>(cin&gt;&gt;n&amp;&amp;n!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		int CF[11];</span><br><span class="line">		<span class="keyword">for</span>(int i=0;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;CF[i];</span><br><span class="line">		&#125;</span><br><span class="line">		double left,right,mid,temp,ans;</span><br><span class="line">		left=-1.0;</span><br><span class="line">		right=1e6;</span><br><span class="line">		ans=0.0;</span><br><span class="line">		<span class="keyword">while</span>(fabs(ans+CF[0])&gt;1e-7)</span><br><span class="line">		&#123;</span><br><span class="line">			temp=1.0;</span><br><span class="line">			ans=0.0;</span><br><span class="line">			mid=(left+right)/2;</span><br><span class="line">			<span class="keyword">for</span>(int i=1;i&lt;=n;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				temp=temp/(1+mid);</span><br><span class="line">				ans+=temp*CF[i]; </span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>((ans+CF[0])&gt;0)</span><br><span class="line">			&#123;</span><br><span class="line">				left=mid;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				right=mid;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;fixed&lt;&lt;setprecision(2)&lt;&lt;mid&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/03/贪心算法/">
-            
-                <span>贪心算法</span>
-        </a>
-        <div class="abstract-content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>话不多说，直接上题目
-        </p></div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="算法">算法</a>
-    
-</div>
-            
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://Gardeniakk.github.io">Gardenia</a>
+            </p><p>原文链接：<a href="https://Gardeniakk.github.io/2018/11/04/递归与分治/">https://Gardeniakk.github.io/2018/11/04/递归与分治/</a>
+            </p><p>发表日期：<a href="https://Gardeniakk.github.io/2018/11/04/递归与分治/">November 4th 2018, 8:43:41 pm</a>
+            </p><p>更新日期：<a href="https://Gardeniakk.github.io/2018/11/04/递归与分治/">November 5th 2018, 4:28:45 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/11/03/贪心算法/" title="贪心算法">
+                    <div class="prevTitle">贪心算法</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -484,6 +526,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -659,6 +719,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
