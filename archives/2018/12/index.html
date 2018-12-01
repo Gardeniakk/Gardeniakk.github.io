@@ -346,23 +346,29 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2018/11/09/南京邮电大学CTF平台Writeup/">
+        <a class="abstract-title" href="/2018/12/01/BugkuCTF-Web-Writeup/">
             
-                <span>南京邮电大学CTF平台Writeup</span>
+                <span>BugkuCTF Web Writeup</span>
         </a>
         <div class="abstract-content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>给自己一个备忘录，记录学习过程
-        </p></div>
+            前言菜狗就要多刷题…
+正文web2flag在源码的注释里
+计算器改一下text文本框的最大输入位数&gt;1即可
+web基础$_GETGET方式传参即可
+web基础$_POSTpost方式传参即可
+矛盾1234567$num=$_GET['num'];if(!is_numeric($num))&#123;echo $num;if($num==1)echo 'flag&#123;**********&#125;';&#125;
+这题要求传参num不能是数字，而且num=1，一开始没有什么思路，认为是弱类型的绕过，传了true进去，发现无效，问了一下度娘，发现在数字后面加上%00截断，is_...
+        </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/01</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF Writeup">CTF Writeup</a>
     
 </div>
             
