@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gardenia30.top/"/>
-  <updated>2018-12-23T06:12:22.917Z</updated>
+  <updated>2018-12-23T03:46:54.703Z</updated>
   <id>https://gardenia30.top/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>RSA公钥密码算法</title>
-    <link href="https://gardenia30.top/2018/12/23/RSA%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
-    <id>https://gardenia30.top/2018/12/23/RSA公钥密码算法/</id>
-    <published>2018-12-23T05:42:29.000Z</published>
-    <updated>2018-12-23T06:12:22.917Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>梳理一下RSA的基本思路，顺便把密码学课程设计做一下<a id="more"></a></p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="RSA密钥生成"><a href="#RSA密钥生成" class="headerlink" title="RSA密钥生成"></a>RSA密钥生成</h2><p>1.先选取两个足够大的安全大素数p和q，这里的大是指长度足够长，长度至少为1024bit;</p><p>2.这时n就已经确定好了，<code>n=p*q</code>，<code>φ(n)=(p-1)*(q-1)</code>;</p><p>3.随机选取一个e(1&lt;e&lt;φ(n)),e就是算法的公钥，满足<code>gcd(e,φ(n))=1</code>;</p><p>4.求e关于φ(n)的模逆d，d就是算法的私钥；</p><h2 id="RSA的加密过程"><a href="#RSA的加密过程" class="headerlink" title="RSA的加密过程"></a>RSA的加密过程</h2><p>1.将明文分组，每组对应的十进制数小于n，然后对每个明文分组进行加密；</p><p>2.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;梳理一下RSA的基本思路，顺便把密码学课程设计做一下
-    
-    </summary>
-    
-      <category term="Study" scheme="https://gardenia30.top/categories/Study/"/>
-    
-    
-      <category term="Crypto" scheme="https://gardenia30.top/tags/Crypto/"/>
-    
-  </entry>
   
   <entry>
     <title>DigitalOcean+PuTTY+SS如何撸梯子</title>
