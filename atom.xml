@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gardenia30.top/"/>
-  <updated>2019-05-23T12:37:54.148Z</updated>
+  <updated>2019-06-01T17:01:23.317Z</updated>
   <id>https://gardenia30.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>May</title>
+    <link href="https://gardenia30.top/2019/06/01/May/"/>
+    <id>https://gardenia30.top/2019/06/01/May/</id>
+    <published>2019-06-01T15:42:48.000Z</published>
+    <updated>2019-06-01T17:01:23.317Z</updated>
+    
+    <content type="html"><![CDATA[<p>​    <strong>已是深夜，窗外却依旧灯火通明。</strong><a id="more"></a></p><p>​    校庆的今天也是三点一线，只能说不愧是校庆，图书馆的空调也似乎突然感受到了我前几个星期的诉求，在校庆这一天似乎竭尽全力地想展现学校基础设施的完善，他在忘我地工作，似乎想把以前我诉求的冷气源源不断地还给我，谢谢，不过我知道空调是没有感情的，因为他不知道，要给在考研面前瑟瑟发抖的学子们一点温暖……</p><p>​    四月，樱花烂漫，却无时间去欣赏，只能在归宿路上匆匆一瞥；回忆里，上一次与你相见也是在四月，那时候的南方，樱花已谢，但与你相见，就像是个孩子得到了梦寐以求的七色棒棒糖。</p><p>​    五月，你的操作系统是否安全？？？网络攻防是否实践？？？NO！！！五月最浓墨重彩的一笔并不是他们，而是我的第一次北京之旅，应急响应杯，虽然最后和队友只拿了个第八，但真的感谢老张给的这次机会，北京之行着实意义重大，AWD初体验，让我了解到我究竟是个多菜的选手，我今后要在哪些方面需要继续提升；</p><p>​    六月，数学是主角，英语同样不可忽视，如果一天里考研复习进入学习效率很低的阶段可以拿出自己的不足之处还有知识盲区多加弥补；</p><p>​    回首看看自己的博客，还是WP居多，整天写WP的人应该是没有什么未来的……所以这个月，闲暇时刻加强基础漏洞的学习，偏向原理，动手复现，写一些技术性的文章，把以前浮于表面的漏洞给弥补上，把以前没读完的书给读完，烂尾的东西要好好再次收尾……<strong>切忌浮于表面！！！！！！！！</strong></p><p>​    <strong>June：</strong></p><ul><li>考研数学（most important）</li><li>考研英语（&gt;=下面的所有）</li><li>基础漏洞原理再学习+亲自复现</li><li>扫除基础漏洞的知识盲区</li><li>基础工具的使用总结</li></ul><p>​    <strong>不忘初心，砥砺前行！</strong></p><p>​    <strong>窗外已无灯火，我心却彻夜通明！</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;​    &lt;strong&gt;已是深夜，窗外却依旧灯火通明。&lt;/strong&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://gardenia30.top/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="随笔" scheme="https://gardenia30.top/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>移动网络安全复习</title>
@@ -472,28 +494,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;终于放假了，整理一波之前密码学的报告和笔记
-    
-    </summary>
-    
-      <category term="密码学学习" scheme="https://gardenia30.top/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="Crypto" scheme="https://gardenia30.top/tags/Crypto/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>序列密码学习笔记</title>
-    <link href="https://gardenia30.top/2019/01/01/%E5%BA%8F%E5%88%97%E5%AF%86%E7%A0%81%E7%AC%94%E8%AE%B0/"/>
-    <id>https://gardenia30.top/2019/01/01/序列密码笔记/</id>
-    <published>2019-01-01T09:10:17.000Z</published>
-    <updated>2019-04-09T09:24:52.696Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2019年的第一天，继续加油鸭！<a id="more"></a></p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="序列密码简单叙述"><a href="#序列密码简单叙述" class="headerlink" title="序列密码简单叙述"></a>序列密码简单叙述</h2><p>序列密码属于对称加密；它的加密用一个随机序列(密钥流)与明文序列按位加密产生密文，用同一随机序列与密文序列叠加来恢复明文序列密码为对称加密，一次只对明文消息的单个bit进行加密解密；一般密钥流的长度等于需要加密的密文的长度</p><p><a href="https://imgchr.com/i/F4zDhj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/01/01/F4zDhj.md.png" alt="F4zDhj.md.png"></a></p><p><strong>特点：</strong></p><ol><li>加解密运算只是简单的模二加（异或）运算</li><li>密码强度主要靠密钥流的随机性</li></ol><h2 id="序列密码加密解密过程"><a href="#序列密码加密解密过程" class="headerlink" title="序列密码加密解密过程"></a>序列密码加密解密过程</h2><p>1.密钥流产生于种子密钥，种子密钥K通过密钥流发生器产生密钥流<code>k=k0k1k2k3...kn-1</code></p><p>2.明文序列为<code>M=m0m1m2m3...m(n-1)</code></p><p>3.接下来就是K与M逐位异或得到C的序列<img src="https://s1.ax1x.com/2018/12/24/F6IdrF.png" alt="img"></p><p>4.解密不必多说，只要异或回去就好<img src="https://s1.ax1x.com/2018/12/24/F6Ifqe.png" alt="img"></p><p><strong>具体实现的流程图：</strong></p><p><img src="https://s1.ax1x.com/2018/12/24/F6IIIA.png" alt="img"></p><h2 id="序列密码的分类"><a href="#序列密码的分类" class="headerlink" title="序列密码的分类"></a>序列密码的分类</h2><h3 id="1-同步序列密码"><a href="#1-同步序列密码" class="headerlink" title="1.同步序列密码"></a>1.同步序列密码</h3><p>所谓同步序列密码指的是：密钥序列的产生独立于明文消息和密文消息；</p><p><strong>加密过程如下:</strong></p><p><img src="https://s1.ax1x.com/2018/12/24/F6TD91.png" alt="img"></p><p><code>f是状态函数，和密钥源产生必要得状态参数，g是产生密钥序列ki的函数，E是将ki与mi结合输出ci的函数</code></p><p><strong>模型：</strong></p><p><img src="https://s2.ax1x.com/2019/01/01/F4zC0U.png" alt="F4zC0U.png"><img src="https://s2.ax1x.com/2019/01/01/F4zP7F.png" alt="F4zP7F.png"></p><p><strong>特点：</strong></p><p>1.无错误传播：各符号之间真正独立。一个传播错误只影响一个符号，不会影响到后继的符号</p><p>2.同步：发送方和接收方必须保持精确的、用同样的密钥并作用在同样的位置上，才能正确的解密</p><h3 id="2-自同步序列密码"><a href="#2-自同步序列密码" class="headerlink" title="2.自同步序列密码"></a>2.自同步序列密码</h3><p>发双方中的任何一方，其密钥流的产生依赖于密文流；</p><p><strong>加密过程：</strong></p><p><a href="https://imgchr.com/i/F4zunK" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/01/01/F4zunK.md.png" alt="F4zunK.md.png"></a></p><p><strong>模型：</strong></p><p><img src="https://s2.ax1x.com/2019/01/01/F4zM7D.png" alt="加密.png"><img src="https://s2.ax1x.com/2019/01/01/F4zlAe.png" alt="解密.png"></p><p><strong>特点：</strong></p><p>1.有限错误传播：设密钥序列产生器具有n位存储，则一个符号的传输错误只影响到后面n符号的解密</p><p>2.自同步：只要接收方连续收到n个正确的密文符号，密钥序列产生器便会自动地恢复同步 </p><p>3.消除明文统计特性</p><h2 id="线性反馈移位寄存器"><a href="#线性反馈移位寄存器" class="headerlink" title="线性反馈移位寄存器"></a>线性反馈移位寄存器</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>1.可以产生具有良好伪随机性的序列如：m序列，所以在序列密码中作为密钥序列的驱动序列</p><p>2.一个线性反馈移位寄存器由两部分组成：<strong>移位寄存器+反馈函数</strong></p><h3 id="游程"><a href="#游程" class="headerlink" title="游程"></a>游程</h3><p>游程就是指连续的1或0序列，游程长度是指连续的1或0序列的长度；</p><h3 id="移位寄存器"><a href="#移位寄存器" class="headerlink" title="移位寄存器"></a>移位寄存器</h3><p>移位寄存器是指有n个寄存器（称为n级移位寄存器）<code>r1,r2,…,rn</code>从右到左排列，每个寄存器中能存放1位二进制数，所有寄存器中的数可以统一向右（或向左）移动1位，称为进动1拍。即<code>r1</code>的值<code>(b1)</code>右移1位后输出，然后<code>r2</code>的值<code>(b2)</code>送<code>r1</code> ,<code>r3</code>的值<code>(b3)</code>送<code>r2</code>,……最后，<code>rn</code>的值<code>(bn)</code>送<code>rn-1</code></p><p><img src="https://s2.ax1x.com/2019/01/01/F5FfMj.png" alt="F5FfMj.png"></p><h3 id="反馈移位寄存器-FSR"><a href="#反馈移位寄存器-FSR" class="headerlink" title="反馈移位寄存器(FSR)"></a>反馈移位寄存器(FSR)</h3><p>反馈移位寄存器(feedback shift register,FSR)是由n位的寄存器和反馈函数(feedback function)组成，n位的寄存器中的初始值称为移位寄存器的初态</p><p><img src="https://s2.ax1x.com/2019/01/01/F5F4Ln.png" alt="F5F4Ln.png"></p><h3 id="线性反馈移位寄存器（LFSR）"><a href="#线性反馈移位寄存器（LFSR）" class="headerlink" title="线性反馈移位寄存器（LFSR）"></a>线性反馈移位寄存器（LFSR）</h3><p>LFSR是一种特殊的FSR，其反馈函数是移位寄存器中某些位的异或，参与运算的这些位叫做<strong><em>抽头位</em></strong>；</p><p><strong>特征：</strong></p><p>1.n级LFSR的有效状态为<code>(2^n)-1</code>（全0状态除外，因全0状态的输出序列一直为全0），也即理论上能够产生周期为<code>(2^n)-1</code>的伪随机序列。但要产生最大周期的输出序列，抽头位有一定要求;</p><p>2.为了使LFSR得到最大的周期(2^n)-1，其生成多项式（由抽头序列加上常数1形成的多项式）要是本原多项式，这样生成的序列叫做m序列</p><p><strong>本原多项式：</strong></p><p><a href="https://imgchr.com/i/F5AoCT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/01/01/F5AoCT.md.png" alt="F5AoCT.md.png"></a><br><strong>加解密：</strong></p><p>一个LFSR可以生成足够长的密钥二进制序列加密明文二进制序列，要解密密文，只需要运行具有相同初始状态的LFSR即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;2019年的第一天，继续加油鸭！
     
     </summary>
     
