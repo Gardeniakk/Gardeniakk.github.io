@@ -11,9 +11,14 @@
 <h1 id="Linux账号管理与ACL权限设置"><a href="#Linux账号管理与ACL权限设置" class="headerlink" title="Linux账号管理与ACL权限设置"></a>Linux账号管理与ACL权限设置</h1><h2 id="linux账号与用户组"><a href="#linux账号与用户组" class="headerlink" title="linux账号与用户组"></a>linux账号与用户组</h2><h3 id="用户标识符：UID和GID"><a href="#用户标识符：UID和GID" class="headerlink" title="用户标识符：UID和GID"></a>用户标识符：UID和GID</h3><p>用户ID（User ID）为UID              UID与账号的对应就在/etc/passwd中</p>
 <p>用户组ID（Group ID）为GID       GID与组的对应在/etc/group中</p>
 <h3 id="用户账号"><a href="#用户账号" class="headerlink" title="用户账号"></a>用户账号</h3><h4 id="拿到shell的过程"><a href="#拿到shell的过程" class="headerlink" title="拿到shell的过程"></a>拿到shell的过程</h4><p>Linux上的用户登录主机获取shell是如何进行的？首先必须要利用tty1~tty6的终端提供的登录接口，输入用户名和密码才能登录，通过网络登录则需要ssh功能，系统后台的处理过程：</p>
-<p>1.查找/etc/passwd里面是否有账号，没有就退出，有的话就将该用户的UID和GID(etc/group)读出来，家目录和shell也读出</p>
-<p>2.接下来就是核对密码表。在/etc/shadow里查找出同一个UID，然后核对刚刚输入的密码是否一致</p>
-<p>3.一切顺利就进入shell</p>
+<ol>
+<li><p>查找/etc/passwd里面是否有账号，没有就退出，有的话就将该用户的UID和GID(etc/group)读出来，家目录和shell也读出</p>
+</li>
+<li><p>接下来就是核对密码表。在/etc/shadow里查找出同一个UID，然后核对刚刚输入的密码是否一致</p>
+</li>
+<li><p>一切顺利就进入shell</p>
+</li>
+</ol>
 <h4 id="etc-passwd结构"><a href="#etc-passwd结构" class="headerlink" title="/etc/passwd结构"></a>/etc/passwd结构</h4><p>每一行代表一个账户，里面有许多本来系统运行所必须的账号，简称系统账户，例如bin，adm，nobody…每一行用分号分开，每一部分代表的内容都不一样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash</span><br></pre></td></tr></table></figure>
 <ol>
