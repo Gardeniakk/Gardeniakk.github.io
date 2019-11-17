@@ -1,0 +1,193 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Linux基础学习笔记-文件权限"><meta name="keywords" content="Linux"><meta name="author" content="Gard3nia"><meta name="copyright" content="Gard3nia"><title>Linux基础学习笔记-文件权限 | Gard3nia's Notebook</title><link rel="shortcut icon" href="/rea.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux文件权限"><span class="toc-number">2.</span> <span class="toc-text">Linux文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用者与群组"><span class="toc-number">2.1.</span> <span class="toc-text">使用者与群组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux文件权限概念"><span class="toc-number">2.2.</span> <span class="toc-text">Linux文件权限概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux文件属性"><span class="toc-number">2.2.1.</span> <span class="toc-text">Linux文件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux文件权限的重要性"><span class="toc-number">2.2.2.</span> <span class="toc-text">Linux文件权限的重要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何改变文件属性和权限"><span class="toc-number">2.2.3.</span> <span class="toc-text">如何改变文件属性和权限</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#chgrp"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">chgrp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chown"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">chown</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chmod"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">chmod</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录与文件权限的意义"><span class="toc-number">2.2.4.</span> <span class="toc-text">目录与文件权限的意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件权限的意义"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">文件权限的意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#目录权限的意义"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">目录权限的意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux文件种类与扩展名"><span class="toc-number">2.2.5.</span> <span class="toc-text">Linux文件种类与扩展名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux目录配置"><span class="toc-number">2.3.</span> <span class="toc-text">Linux目录配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FHS标准"><span class="toc-number">2.3.1.</span> <span class="toc-text">FHS标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#usr"><span class="toc-number">2.3.2.</span> <span class="toc-text">/usr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#var"><span class="toc-number">2.3.3.</span> <span class="toc-text">/var</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录树"><span class="toc-number">2.3.4.</span> <span class="toc-text">目录树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相对路径和绝对路径"><span class="toc-number">2.3.5.</span> <span class="toc-text">相对路径和绝对路径</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考书目"><span class="toc-number">3.</span> <span class="toc-text">参考书目</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Gard3nia</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">17</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">18</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">friendlinks</div><a class="author-info-links__name text-center" href="https://skysec.top">一叶飘零学长</a><a class="author-info-links__name text-center" href="https://0verwatch.top/">0verwatch</a><a class="author-info-links__name text-center" href="http://chaosec.top/">瑞雪师傅</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/05/26/VE5mHf.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Gard3nia's Notebook</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">归档</a><a class="site-page" href="/about">简介</a></span></div><div id="post-info"><div id="post-title">Linux基础学习笔记-文件权限</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-02</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux基础/">Linux基础</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.7k</span><span class="post-meta__separator">|</span><span>Reading time: 8 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>学习计划里有一些关于Linux的知识，所以今后一段时间用来学习Linux的基础知识和服务器架设知识，平时一直在用，但是一知半解，抱着一颗努力的心，开始吧！以下是有关Linux文件权限和目录配置的一些笔记！<a id="more"></a></p>
+<h1 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h1><h2 id="使用者与群组"><a href="#使用者与群组" class="headerlink" title="使用者与群组"></a>使用者与群组</h2><p>每个文件都有非常多的权限与属性，其中最重要的就是文件的拥有者的概念。</p>
+<ol>
+<li><p>文件拥有者</p>
+<p>其实就是创建文件的那个人，linux是个多用户多任务的系统，因此会有很多人使用这个系统，所以就需要考虑每个人的隐私权</p>
+</li>
+<li><p>群组概念</p>
+<p>每组的成员之间能够互相修改对方的数据，但是其他组的组员则不会看到本组的文件内容。</p>
+<p>每个人都可以键入多个群组</p>
+</li>
+<li><p>其他人</p>
+<p>不属于文件拥有者和群组成员的第三者</p>
+</li>
+<li><p>root</p>
+<p>root属于天神级别，凌驾于所有权限之上</p>
+</li>
+</ol>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBeeNd.png" alt="MBeeNd.png"></p>
+<p>系统上的账号与一般身份用户，还有root用户的相关信息都记录在/etc/passwd文件中，个人密码记录在/etc/shadow里面，组名都记录在/etc/group里</p>
+<h2 id="Linux文件权限概念"><a href="#Linux文件权限概念" class="headerlink" title="Linux文件权限概念"></a>Linux文件权限概念</h2><h3 id="Linux文件属性"><a href="#Linux文件属性" class="headerlink" title="Linux文件属性"></a>Linux文件属性</h3><p>使用<code>ls -l</code>就可以直接将文件的最详细信息列出来：</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBmnZF.png" alt="MBmnZF.png"></p>
+<ol>
+<li><p>第一栏代表这个文件的类型和权限</p>
+<p><img src="https://s2.ax1x.com/2019/11/16/MBmYqO.png" alt="MBmYqO.png"></p>
+<p>第一个字符代表这个文件是目录、文件或者链接文件等等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[d] 表示目录</span><br><span class="line">[-] 表示文件</span><br><span class="line">[l] 表示链接文件</span><br><span class="line">[b] 表示设备文件里可供储存的周边设备</span><br><span class="line">[c] 表示设备文件里的串行端口设备，键盘鼠标之类</span><br></pre></td></tr></table></figure>
+<p>下面的字符三个一组，均为【rwx】的三个参数的组合，其中【r】表示可读，【w】表示可写，【x】代表可执行</p>
+<blockquote>
+<p>第一组为文件拥有者可以具备的权限<br>第二组为加入此群组的账号的权限<br>第三组为非本人且没有加入本群组的其他账户的权限</p>
+</blockquote>
+</li>
+<li><p>第二栏表示有多少个文件名链接到这个节点（i-node）</p>
+<p>每个文件都会将他的权限与属性记录到文件系统的inode里面，不过我们使用的目录树却是使用文件名来记录，因此每个文件名就会链接到一个inode。这个属性记录的就是有多少个不同的文件名连接到相同的一个inode号码上</p>
+</li>
+<li><p>第三栏表示的是这个文件的拥有者账户</p>
+</li>
+<li><p>第四栏表示的是这个我文件的所属群组</p>
+</li>
+<li><p>第五栏为这个文件的容量大小，默认单位bytes</p>
+</li>
+<li><p>第六栏为这个文件的创建日期或者最近修改时间</p>
+</li>
+<li><p>第七栏为这个文件的文件名</p>
+</li>
+</ol>
+<blockquote>
+<p>notes:</p>
+<p>如果文件名之前多了一个【.】,就代表这个文件为隐藏文件</p>
+</blockquote>
+<h3 id="Linux文件权限的重要性"><a href="#Linux文件权限的重要性" class="headerlink" title="Linux文件权限的重要性"></a>Linux文件权限的重要性</h3><ol>
+<li><p>系统保护功能</p>
+<p>类似shadow这类账号管理文件非常重要，不能让任何人读取，只有root才可以读取，所以设置为所有人都没有任何权限</p>
+</li>
+<li><p>团队开发软件或数据共享功能</p>
+<p>开发团队的小组，希望每个人都可以使用某些目录下的文件，而不对其他团队开放就可以设置文件的权限来解决</p>
+</li>
+</ol>
+<h3 id="如何改变文件属性和权限"><a href="#如何改变文件属性和权限" class="headerlink" title="如何改变文件属性和权限"></a>如何改变文件属性和权限</h3><blockquote>
+<p>chgrp：改变文件所属群组</p>
+<p>chown：改变文件拥有者</p>
+<p>chmod：改变文件的权限，SUID,SGID,SBIT等</p>
+</blockquote>
+<h4 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h4><p>change group，直接以<code>chgrp+群组名称+文件名</code>即可改变文件的所属群组；如果是目录文件，且想要递归进行持续变更，需要在<code>chgrp</code>后面加上<code>-R</code>参数；需要注意的是这个群组名称必须要在/etc/group里面存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost hack]$ ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 gard3nia gard3nia 0 Nov  9 03:01 hack.txt</span><br><span class="line">[gard3nia@localhost hack]$ chgrp docker hack.txt</span><br><span class="line">[gard3nia@localhost hack]$ ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 gard3nia docker 0 Nov  9 03:01 hack.txt</span><br></pre></td></tr></table></figure>
+<h4 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h4><p>change owner，改变文件的拥有者，后面跟上的用户名必须要在/etc/passwd里存在才可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost hack]$ sudo chown xl hack.txt</span><br><span class="line">[gard3nia@localhost hack]$ ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 xl gard3nia 0 Nov  9 03:01 hack.txt</span><br></pre></td></tr></table></figure>
+<p>此外chown还可以顺便修改群组，如果想要连同目录下面的所有文件或者目录全部都同时更改，直接加上-R参数即可；下面是一种方式，直接使用<code>用户名：用户组</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost hack]$ sudo chown xl:xl hack.txt</span><br><span class="line">[gard3nia@localhost hack]$ ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 xl xl 0 Nov  9 03:01 hack.txt</span><br></pre></td></tr></table></figure>
+<p>还有另一种方式<code>用户名.用户组</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost hack]$ sudo chown gard3nia.gard3nia hack.txt</span><br><span class="line">[sudo] password for gard3nia:</span><br><span class="line">[gard3nia@localhost hack]$ ls -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 gard3nia gard3nia 0 Nov  9 03:01 hack.txt</span><br></pre></td></tr></table></figure>
+<p><strong>notes：</strong></p>
+<blockquote>
+<p>什么时候来使用这两个命令？最常见的就是在复制文件给你自己以外的其他人的时候，cp行为会复制执行者的权限和属性</p>
+</blockquote>
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>文件的权限改变使用的是chmod这个指令，但是权限的设置方法有两种，可以分别使用数字和符号来进行趣新年的变更；</p>
+<ul>
+<li><p>使用数字类型改变文件权限</p>
+<p>Linux文件的基本权限有九个，分别是<code>/owner/group/others</code>对应的【rwx】权限，可以使用数字来表示【rwx】三个值：</p>
+<blockquote>
+<p>r:4&gt;w:2&gt;x:1</p>
+</blockquote>
+<p>每个身份的各自权限值需要累加</p>
+<blockquote>
+<p>owner=rwx=4+2+1=7&gt;group=rwx=4+2+1=7&gt;others=—=0</p>
+</blockquote>
+<p>所以这样就可以直接设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
+<p>规范的chmod语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod [-R] xyz filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>符号类型改变文件权限</p>
+<p>借由u，g，o来代表三种身份的权限，此外a表示all即全部的身份，读写权限就写成rwx即可，可使用+，-，=来进行权限的赋值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod u=rwx,go=rx filename</span><br><span class="line">chmod a-x filename </span><br><span class="line">chmod a+x filename</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="目录与文件权限的意义"><a href="#目录与文件权限的意义" class="headerlink" title="目录与文件权限的意义"></a>目录与文件权限的意义</h3><h4 id="文件权限的意义"><a href="#文件权限的意义" class="headerlink" title="文件权限的意义"></a>文件权限的意义</h4><p>对于文件的rwx来说，主要都是针对<strong>文件的内容</strong>而言：</p>
+<blockquote>
+<p>r：读取此文件内容</p>
+<p>w：可以写入，编辑，新增，修改此文件的内容（不含删除此文件）</p>
+<p>x：该文件具有被系统执行的权限</p>
+</blockquote>
+<p>notes：</p>
+<blockquote>
+<p>文件能否被执行，靠的是x这个权限，和文件名没有直接关系</p>
+</blockquote>
+<h4 id="目录权限的意义"><a href="#目录权限的意义" class="headerlink" title="目录权限的意义"></a>目录权限的意义</h4><p>目录的内容在记录文件名清单，具体的rwx和文件含义区别很大：</p>
+<blockquote>
+<p>r：表示具有读取目录结构清单的权限，可以查询该目录下面的文件名数据，所以就可以用ls这个命令该目录的内容列表显示出来</p>
+<p>w：表示具有变动目录结构清单的权限，具体指：</p>
+<ul>
+<li>创建新目录</li>
+<li>删除已经存在的目录或者文件（无论权限）</li>
+<li>更改文件名或者目录名</li>
+<li>搬迁该目录内的文件、目录位置</li>
+</ul>
+<p>x：表示使用者可以进入该目录，将其作为工作目录，即cd进去</p>
+</blockquote>
+<h3 id="Linux文件种类与扩展名"><a href="#Linux文件种类与扩展名" class="headerlink" title="Linux文件种类与扩展名"></a>Linux文件种类与扩展名</h3><p>1.文件种类</p>
+<ul>
+<li>[-]表示常规文件，又可分类：<ul>
+<li>纯文本文件：我们可以直接读取到数据，比如数字，字母等，几乎可以作为设置的文件都属于这一文件类型</li>
+<li>二进制文件：系统其实仅仅认识且可以执行二进制文件，Linux当中的可执行文件就是这种格式</li>
+<li>数据格式文件：有些程序在运行过程中会读取某些特定格式的文件成为data file</li>
+</ul>
+</li>
+<li>[d]表示目录文件</li>
+<li>[l]表示链接文件，类似windows的快捷方式</li>
+<li>设备与设备文件(device)：与系统周边及存储相关的一些文件，集中在/dev这个目录下面<ul>
+<li>区块设备文件</li>
+<li>字符设备文件</li>
+</ul>
+</li>
+<li>数据接口文件(sockets)：常常被用于在网络上的数据承接，服务器和客户端可以通过sockets来进行数据沟通’</li>
+<li>数据输送档(FIFO)</li>
+</ul>
+<p>2.文件扩展名</p>
+<p>Linux上文件的扩展名只是让你了解该文件的用途而已。文件是否具有执行能力，是需要看文件的执行权限的，即x，文件能不能成功执行，就需要看文件的内容</p>
+<h2 id="Linux目录配置"><a href="#Linux目录配置" class="headerlink" title="Linux目录配置"></a>Linux目录配置</h2><h3 id="FHS标准"><a href="#FHS标准" class="headerlink" title="FHS标准"></a>FHS标准</h3><blockquote>
+<p>/bin：放置的是在单人维护模式下还能被操作的指令，可以被root和一般账户使用</p>
+<p>/boot：放置开机会使用到的文件，包括linux的核心文件，开机菜单，配置文件</p>
+<p>/dev：任何周边设备都是以文件的形态存在于这个目录当中</p>
+<p>/etc：系统主要的配置文件，不放置可执行文件</p>
+<p>/lib：放置的是在开机时会用到的函数库</p>
+<p>/media：媒体，软盘，光盘等挂载地点，是一些可删除的设备</p>
+<p>/mnt：暂时挂载某些额外的设备</p>
+<p>/opt：一些第三方辅助软件的目录</p>
+<p>/run：系统启动以后产生的信息</p>
+<p>/sbin：启动过程中需要的启动，修复，还原系统所需要的命令</p>
+<p>/srv：service，是一些网络服务启动以后，这些服务需要使用的数据目录</p>
+<p>/tmp：暂存文件，正在执行的程序暂时放置文件的地方</p>
+<p>/usr：如下</p>
+<p>/var：如下</p>
+<p>/home：家目录</p>
+<p>/root：root家目录</p>
+</blockquote>
+<h3 id="usr"><a href="#usr" class="headerlink" title="/usr"></a>/usr</h3><blockquote>
+<p>/usr/bin：和/bin一毛一样，/bin被链接至此</p>
+<p>/usr/lib：和/lib一样，/lib被链接至此</p>
+<p>/usr/local：系统管理员在本机安装下载的软件的安装目录</p>
+<p>/usr/sbin：/sbin链接至此</p>
+<p>/usr/share：放置只读文件，也包括共享文件</p>
+</blockquote>
+<h3 id="var"><a href="#var" class="headerlink" title="/var"></a>/var</h3><blockquote>
+<p>/var/cache：应用程序本身运行过程中产生的一些缓存</p>
+<p>/var/lib：程序执行的过程中，需要使用的数据文件放置的目录</p>
+<p>/var/lock：某些设备只能别一个人使用，起到上锁的作用</p>
+<p>/var/log：日志文件的放置目录</p>
+<p>/var/mail：电子邮件目录</p>
+<p>/var/run：某些程序启动以后，会将他们的pid放置到这个目录下面，连接到/run</p>
+<p>/var/spool：放置一些队列数据，排队等待其他程序使用的数据</p>
+</blockquote>
+<h3 id="目录树"><a href="#目录树" class="headerlink" title="目录树"></a>目录树</h3><p><img src="https://s2.ax1x.com/2019/11/17/MD6Tfg.png" alt="MD6Tfg.png"></p>
+<h3 id="相对路径和绝对路径"><a href="#相对路径和绝对路径" class="headerlink" title="相对路径和绝对路径"></a>相对路径和绝对路径</h3><ul>
+<li>绝对路径：由根目录/开始写起的文件名或者目录名称</li>
+<li>相对路径：相对于目前路径的文件名写法</li>
+</ul>
+<blockquote>
+<p>cd /var/log</p>
+<p>cd ../var/log</p>
+<p>【.】表示当前目录</p>
+<p>【..】表示上一层目录</p>
+</blockquote>
+<h1 id="参考书目"><a href="#参考书目" class="headerlink" title="参考书目"></a>参考书目</h1><p>《鸟哥的Linux私房菜基础学习篇》</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Gard3nia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://gardenia30.top/2019/11/02/Linux基础学习笔记-文件权限/">https://gardenia30.top/2019/11/02/Linux基础学习笔记-文件权限/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/12/Linux学习笔记-账号管理/"><i class="fa fa-chevron-left">  </i><span>Linux基础学习笔记-账号管理</span></a></div><div class="next-post pull-right"><a href="/2019/06/02/Docker学习笔记/"><span>Docker学习笔记</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By Gard3nia</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Just keep moving!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
