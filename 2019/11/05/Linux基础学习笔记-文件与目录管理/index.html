@@ -1,0 +1,167 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Linux基础学习笔记-文件与目录管理"><meta name="keywords" content="Linux"><meta name="author" content="Gard3nia"><meta name="copyright" content="Gard3nia"><title>Linux基础学习笔记-文件与目录管理 | Gard3nia's Notebook</title><link rel="shortcut icon" href="/rea.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux文件与目录管理"><span class="toc-number">2.</span> <span class="toc-text">Linux文件与目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录与路径"><span class="toc-number">2.1.</span> <span class="toc-text">目录与路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相对路径和绝对路径"><span class="toc-number">2.1.1.</span> <span class="toc-text">相对路径和绝对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录的相关操作"><span class="toc-number">2.1.2.</span> <span class="toc-text">目录的相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊符号"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">特殊符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cd"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">cd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pwd"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">pwd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mkdir"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">mkdir</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rmdir"><span class="toc-number">2.1.2.5.</span> <span class="toc-text">rmdir</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PATH"><span class="toc-number">2.1.3.</span> <span class="toc-text">$PATH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件与目录管理"><span class="toc-number">2.2.</span> <span class="toc-text">文件与目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件与目录查看：ls"><span class="toc-number">2.2.1.</span> <span class="toc-text">文件与目录查看：ls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制、删除和移动：cp，rm，mv"><span class="toc-number">2.2.2.</span> <span class="toc-text">复制、删除和移动：cp，rm，mv</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cp"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">cp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rm"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">rm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mv"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">mv</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件内容查看"><span class="toc-number">2.2.3.</span> <span class="toc-text">文件内容查看</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件与目录的默认权限与隐藏权限"><span class="toc-number">2.3.</span> <span class="toc-text">文件与目录的默认权限与隐藏权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#默认权限设置umask"><span class="toc-number">2.3.1.</span> <span class="toc-text">默认权限设置umask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件隐藏属性chattr-lsattr"><span class="toc-number">2.3.2.</span> <span class="toc-text">文件隐藏属性chattr lsattr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件特殊权限：SUID，SGID，SBIT"><span class="toc-number">2.3.3.</span> <span class="toc-text">文件特殊权限：SUID，SGID，SBIT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#观察文件类型"><span class="toc-number">2.3.4.</span> <span class="toc-text">观察文件类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令与文件的查找"><span class="toc-number">2.4.</span> <span class="toc-text">命令与文件的查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-脚本文件的查找-which"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.脚本文件的查找 which</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-文件的查找-whereis-locate-find"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.文件的查找 whereis locate find</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#whereis"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">whereis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#locate"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">locate</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#find"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">find</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Gard3nia</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">18</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">18</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">friendlinks</div><a class="author-info-links__name text-center" href="https://skysec.top">一叶飘零学长</a><a class="author-info-links__name text-center" href="https://0verwatch.top/">0verwatch</a><a class="author-info-links__name text-center" href="http://chaosec.top/">瑞雪师傅</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/05/26/VE5mHf.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Gard3nia's Notebook</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">归档</a><a class="site-page" href="/about">简介</a></span></div><div id="post-info"><div id="post-title">Linux基础学习笔记-文件与目录管理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux基础/">Linux基础</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">2.9k</span><span class="post-meta__separator">|</span><span>Reading time: 9 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>以下是关于Linux文件与目录管理的内容。<a id="more"></a></p>
+<h1 id="Linux文件与目录管理"><a href="#Linux文件与目录管理" class="headerlink" title="Linux文件与目录管理"></a>Linux文件与目录管理</h1><h2 id="目录与路径"><a href="#目录与路径" class="headerlink" title="目录与路径"></a>目录与路径</h2><p>绝对路径和相对路径的写法并不相同；</p>
+<h3 id="相对路径和绝对路径"><a href="#相对路径和绝对路径" class="headerlink" title="相对路径和绝对路径"></a>相对路径和绝对路径</h3><ul>
+<li>绝对路径：一定是从根目录写起的准确文件位置</li>
+<li>相对路径：不是从根目录写起，是相对于当前工作目录的路径</li>
+</ul>
+<h3 id="目录的相关操作"><a href="#目录的相关操作" class="headerlink" title="目录的相关操作"></a>目录的相关操作</h3><h4 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h4><blockquote>
+<p>.        代表此层目录</p>
+<p>..       代表上一层目录</p>
+<p>-        代表前一个工作目录</p>
+<p>~       代表当前使用者的家目录</p>
+<p>~account 代表account这个使用者的家目录</p>
+</blockquote>
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p>表示change directory，是最基础的命令了，在此不必多说：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd    默认进入用户自己的家目录</span><br><span class="line">cd .. 进入上层目录</span><br><span class="line">cd ~  进入家目录</span><br><span class="line">cd -  回到刚刚的工作目录</span><br></pre></td></tr></table></figure>
+<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><p>print working directory，就是显示出目前所在的目录，加上<code>-P</code>选项可以取得正确的目录名称，而不是以连接文件的路径来显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ cd /var/mail</span><br><span class="line">[gard3nia@localhost mail]$ ls</span><br><span class="line">gard3nia  root  test1  xl</span><br><span class="line">[gard3nia@localhost mail]$ pwd -P</span><br><span class="line">/var/spool/mail</span><br></pre></td></tr></table></figure>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p>创建新目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir [-mp] 目录名称</span><br><span class="line">-m 设置文件的权限，直接设置，不需要看umask</span><br><span class="line">-p 帮助你直接将所需要的目录递归建立起来</span><br></pre></td></tr></table></figure>
+<p>直接动动手就行了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ mkdir -m 711 haha</span><br><span class="line">[gard3nia@localhost ~]$ ls -l</span><br><span class="line">total 24</span><br><span class="line">-rw-rw-r--.  1 gard3nia gard3nia 16685 Nov 10 21:01 1.txt</span><br><span class="line">drwxrwxr-x.  2 gard3nia gard3nia    64 Nov 10 09:00 hack</span><br><span class="line">drwx--x--x.  2 gard3nia gard3nia     6 Nov 16 11:16 haha</span><br><span class="line">drwxrwxr-x.  3 gard3nia gard3nia    48 Nov  9 03:41 test1</span><br><span class="line">drwxr-xr-x. 78 root     root      4096 Oct 27 23:18 vulhub</span><br><span class="line"></span><br><span class="line">[gard3nia@localhost ~]$ mkdir -p test1/test2/test3</span><br><span class="line">[gard3nia@localhost ~]$ ls</span><br><span class="line">1.txt  hack  haha  test1  vulhub</span><br><span class="line">[gard3nia@localhost ~]$ cd test1/test2/test3/</span><br></pre></td></tr></table></figure>
+<p><strong>notes</strong></p>
+<blockquote>
+<p>-p 这个选项非常好用，直接递归建立空文件夹，如果没有这个选项，我们只能一个一个建立文件夹</p>
+<p>如果不使用-m选项给目录赋权限，则默认的新建目录的权限就和umask有关</p>
+</blockquote>
+<h4 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h4><p>删除空目录，有一个选项<code>-p</code>，用于连同上层的空目录一起删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ rmdir -p test1/test2/test3/</span><br><span class="line">[gard3nia@localhost ~]$ ls</span><br><span class="line">1.txt  hack  haha  vulhub</span><br></pre></td></tr></table></figure>
+<p>如果想要将目录下面的东西全部都删除，只能采用<code>rm -r</code></p>
+<h3 id="PATH"><a href="#PATH" class="headerlink" title="$PATH"></a>$PATH</h3><p>当我们执行一个命令的时候，例如ls，系统会依照PATH的设置去每个PATH定义的目录下寻找文件名为ls的可执行文件，echo $PATH即可看到加入环境变量的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ echo $PATH</span><br><span class="line">/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/gard3nia/.local/bin:/home/gard3nia/bin</span><br></pre></td></tr></table></figure>
+<p>需要新增环境变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;$&#123;PATH&#125;:新加入的路径&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>notes：</strong></p>
+<ul>
+<li>不同用户的默认PATH不同，默认能执行的命令也不同</li>
+<li>PATH可修改</li>
+<li>本目录不要加入到PATH中</li>
+</ul>
+<h2 id="文件与目录管理"><a href="#文件与目录管理" class="headerlink" title="文件与目录管理"></a>文件与目录管理</h2><h3 id="文件与目录查看：ls"><a href="#文件与目录查看：ls" class="headerlink" title="文件与目录查看：ls"></a>文件与目录查看：ls</h3><p>参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-a 全部文件，连同隐藏文件</span><br><span class="line">-A 全部文件，连同隐藏文件，但是不包括.和..</span><br><span class="line">-d 仅仅列出目录本身，而不是列出目录内的文件数据</span><br><span class="line">-f 直接列出结果，不进行排序</span><br><span class="line">-h 文件大小以GB,KB等等列出，可读性强</span><br><span class="line">-i 列出inode号码</span><br><span class="line">-l 详细信息显示，包括文件的属性与权限等数据</span><br><span class="line">-n 列出UID和GID取代名称</span><br><span class="line">-R 连同子目录的内容一起显示出来，该目录下面的所有文件都会被列出</span><br><span class="line">--full-time 完整时间模式输出</span><br></pre></td></tr></table></figure>
+<p>具体的其他一些不经常使用的参数查看–help即可</p>
+<h3 id="复制、删除和移动：cp，rm，mv"><a href="#复制、删除和移动：cp，rm，mv" class="headerlink" title="复制、删除和移动：cp，rm，mv"></a>复制、删除和移动：cp，rm，mv</h3><h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>复制文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cp 源文件 目标文件</span><br><span class="line">-a 相当于-dr --preserve=all的意思</span><br><span class="line">-d 若源文件为链接文件的属性，则复制链接文件属性而非文件本身</span><br><span class="line">-f 为强制的意思，如果目标文件已经存在并且无法打开，则删除以后再尝试</span><br><span class="line">-i 在目标文件已经存在的时候，覆盖时会先进行询问</span><br><span class="line">-p 连同文件的属性一同复制过去，而非使用默认属性（备份）</span><br><span class="line">-r 递归复制，用于目录的复制操作</span><br><span class="line">-s 复制成为链接文件，即快捷方式</span><br><span class="line">-u 目标文件比源文件旧才更新目标文件，或者目标文件不存在的情况下才复制</span><br><span class="line">--preserve=all 除了-p的属性，还加入了SELinux属性</span><br></pre></td></tr></table></figure>
+<p><strong>notes：</strong></p>
+<blockquote>
+<p>cp这个命令，不同的执行者执行这个命令会产生不同的结果，在默认情况下，cp的源文件与目标文件的权限是不同的，目标文件的拥有者通常会是命令操作者本身，所以我们在进行备份的时候，就不能直接以cp来复制，必须要加上-a或者-p这样的参数来保持原来的属性不变</p>
+</blockquote>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><p>移除文件或者目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-f force强制删除</span><br><span class="line">-i 互动模式</span><br><span class="line">-r 递归删除，用于目录的删除，危...</span><br></pre></td></tr></table></figure>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p>移动文件与目录，或者重命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mv 源文件 目标文件</span><br><span class="line">-f force强制的意思，如果目标文件已经存在，则直接复覆盖</span><br><span class="line">-i 目标文件已经存在的时候，就会询问是否覆盖</span><br><span class="line">-u 如果目标文件已经存在，而且source比较新，才会更新</span><br></pre></td></tr></table></figure>
+<p>用来重命名很好用…</p>
+<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
+<p>cat      由第一行开始显示文件内容</p>
+<p>tac      从最后一行开始显示</p>
+<p>nl        显示的时候，同时输出行号</p>
+<p>more  一页一页地显示文件内容</p>
+<p>less     和more类似，但是可以向前翻页</p>
+<p>head   只看前几行</p>
+<p>tail       只看后几行</p>
+<p>od        以二进制的方式读取文件内容</p>
+<p>touch   创建新文件</p>
+</blockquote>
+<ol>
+<li>cat</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-b 打印出行号，不连同空白行</span><br><span class="line">-n 打印出行号，连同空白行一起</span><br></pre></td></tr></table></figure>
+<p>2.tac</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat反过来输出</span><br></pre></td></tr></table></figure>
+<p>3.nl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">添加行号打印</span><br></pre></td></tr></table></figure>
+<p>4.more，less</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一页一页翻动</span><br></pre></td></tr></table></figure>
+<p>5.head，tail 数据截取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">head -n number 文件名</span><br><span class="line">tail -n number 文件名</span><br></pre></td></tr></table></figure>
+<p>6.touch 可以用来修改或者创建新文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mtime 修改时间（内容）</span><br><span class="line">ctime 状态时间（权限属性）</span><br><span class="line">atime 读取时间（内容被读取）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a 自定义atime</span><br><span class="line">-c 仅仅修改文件的时间，不存在则不会自己创建文件</span><br><span class="line">-d 后面接欲自定义的时间而不用现在的时间</span><br><span class="line">-m 修改mtime</span><br><span class="line">-t 自定义时间</span><br></pre></td></tr></table></figure>
+<p>常用于建立空文件和将某个文件日期自定义为目前的时间</p>
+<h2 id="文件与目录的默认权限与隐藏权限"><a href="#文件与目录的默认权限与隐藏权限" class="headerlink" title="文件与目录的默认权限与隐藏权限"></a>文件与目录的默认权限与隐藏权限</h2><h3 id="默认权限设置umask"><a href="#默认权限设置umask" class="headerlink" title="默认权限设置umask"></a>默认权限设置umask</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dq@dq-PC:~/Documents$ umask</span><br><span class="line">0022</span><br></pre></td></tr></table></figure>
+<p>0022表示在默认值上面需要减去的权限，第一组是特殊权限用的，后面三组分别表示u，g，o，默认权限如下：</p>
+<ul>
+<li>建立的是文件：默认没有x执行权限，即rw，最大就是666，权限为-rw-rw-rw-</li>
+<li>建立的是目录：由于x与进入本目录有关系，所以最大为777，权限为drwxrwxrwx</li>
+</ul>
+<p>减去022以后分别为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--</span><br><span class="line">drwx-r-xr-x</span><br></pre></td></tr></table></figure>
+<p>修改nmask：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmask 002</span><br></pre></td></tr></table></figure>
+<h3 id="文件隐藏属性chattr-lsattr"><a href="#文件隐藏属性chattr-lsattr" class="headerlink" title="文件隐藏属性chattr lsattr"></a>文件隐藏属性chattr lsattr</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chattr +a 设置a以后，这个文件只能增加数据，不能删除也不能修改数据</span><br><span class="line">chattr +i 可以让一个文件不能被删除，改名，设置链接，也无法写入或者新增数据</span><br><span class="line">lsattr    可以查看文件的隐藏属性</span><br></pre></td></tr></table></figure>
+<p>对于像logfile这种文件，+a还是很重要的</p>
+<h3 id="文件特殊权限：SUID，SGID，SBIT"><a href="#文件特殊权限：SUID，SGID，SBIT" class="headerlink" title="文件特殊权限：SUID，SGID，SBIT"></a>文件特殊权限：SUID，SGID，SBIT</h3><ul>
+<li><p>Set UID</p>
+<blockquote>
+<p>SUID权限仅仅对二进制程序有效</p>
+<p>执行者对该程序具有x的可执行权限</p>
+<p>本权限仅仅在执行该程序的过程中有效</p>
+<p>执行者将具有该程序拥有者的权限</p>
+</blockquote>
+<p>举例：</p>
+<p>/etc/shadow的权限为000，只有root可读可写，但是一般的普通用户也可以修改自己的密码，为什么？这就要用到passwd和SUID的功能了</p>
+<blockquote>
+<p>1.一般用户对于/usr/bin/passwd具有x的权限</p>
+<p>2.passwd的拥有者是root这个账号</p>
+<p>3.一般用户执行passwd的过程中，会暂时获得root权限</p>
+<p>4./etc/shadow就会被普通用户修改</p>
+</blockquote>
+<p>但是如果一般用户去使用cat去读取shadow时，因为cat是不具备SUID的，所以是不可以的，而且SUID仅仅可以用在二进制文件上，不可以用在shell脚本上。</p>
+<p><img src="https://s2.ax1x.com/2019/11/17/Mrj334.png" alt="Mrj334.png"></p>
+</li>
+<li><p>Set GID</p>
+<p>当s的标志在文件拥有者的x项为SUID，那么s在用户组的x时则被称为SGID</p>
+<blockquote>
+<p>SGID对二进制程序有用</p>
+<p>程序执行者对于该程序来说，需要具备x的权限</p>
+<p>执行者在执行的时候会获得该程序用户组的支持</p>
+</blockquote>
+<p>举例：</p>
+<p>其实和SUID非常类似，如果用gard3nia这个账户去执行locate时，那么gard3nia会取得slocate用户组的支持，因此就可以去读取mlocate.db</p>
+<p>除了二进制程序以外，SGID也能够用在目录中，这也是非常常见的一种用途，，当一个目录设置了SGID以后，功能如下：</p>
+<blockquote>
+<p>用户具有rx权限时，该用户能够进入此目录</p>
+<p>用户在此目录下的有效用户组将会变成该目录的用户组</p>
+<p>若用户在此目录下具有w的权限，则用户所建立的新文件，该新文件的用户组与此文件的用户组相同</p>
+</blockquote>
+</li>
+<li><p>Sticky Bit</p>
+<p>对于目录有效：</p>
+<blockquote>
+<p>当用户对于此目录有wx权限时，即具有写入的权限</p>
+<p>当用户在该目录下建立文件或者目录时，仅仅有自己和root才有权利删除该文件</p>
+</blockquote>
+</li>
+<li><p>权限设置：</p>
+<blockquote>
+<p>SUID 4</p>
+<p>SGID 2</p>
+<p>SBIT 1</p>
+<p>使用chmod 4755 filename 即可设置SUID</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="观察文件类型"><a href="#观察文件类型" class="headerlink" title="观察文件类型"></a>观察文件类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file 文件名称</span><br></pre></td></tr></table></figure>
+<h2 id="命令与文件的查找"><a href="#命令与文件的查找" class="headerlink" title="命令与文件的查找"></a>命令与文件的查找</h2><h3 id="1-脚本文件的查找-which"><a href="#1-脚本文件的查找-which" class="headerlink" title="1.脚本文件的查找 which"></a>1.脚本文件的查找 which</h3><p>两次tab可以让用户知道有多少命令可以执行，which可以用来查找这些目录的完整文件名放在哪里，通过PATH这个环境变量所规范的路径，去查找执行文件的文件名，如果加上-a的参数，则可以列出所有的可以找到的同名执行文件，而非显示第一个。</p>
+<h3 id="2-文件的查找-whereis-locate-find"><a href="#2-文件的查找-whereis-locate-find" class="headerlink" title="2.文件的查找 whereis locate find"></a>2.文件的查找 whereis locate find</h3><h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>查找速度较快，但是只是查找几个固定的目录，并没有全系统去查询，主要针对的是/bin,/sbin下面的执行文件，以及/usr/share/man下面的man page文件</p>
+<h4 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h4><p>查找速度也非常快，这是因为locate寻找的数据是由已建立的数据库/var/lib/mlocate里面的数据所查找到的，所以不需要从硬盘读取数据，但是需要及时更新数据库文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo updatedb</span><br><span class="line">locate xxx</span><br></pre></td></tr></table></figure>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [path] [option] [action]</span><br></pre></td></tr></table></figure>
+<p>速度慢，影响硬盘性能</p>
+<p>1.与时间有关的参数：共有<code>-mtime，-ctime，-atime</code>选一种介绍:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-mtime n   n天前被修过的文件（一天）</span><br><span class="line">-mtime +n  n天之前，被修改的文件</span><br><span class="line">-mtime -n  n天之内，被修改的文件</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/11/17/MsPMp6.png" alt="MsPMp6.png"></p>
+<p>2.与使用者或者用户组有关的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-uid n</span><br><span class="line">-gid n</span><br><span class="line">-user name</span><br><span class="line">-group name</span><br><span class="line">-nouser     查找文件的拥有者不再passwd中</span><br><span class="line">-nogroup    查找文件的拥有用户组不在group中</span><br></pre></td></tr></table></figure>
+<p>3.与文件权限有关的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-name filename</span><br><span class="line">-size +-SIZE    表示比size大（+）或者比size（-）小的文件</span><br><span class="line">-type TYPE</span><br><span class="line">-perm mode</span><br></pre></td></tr></table></figure>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Gard3nia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://gardenia30.top/2019/11/05/Linux基础学习笔记-文件与目录管理/">https://gardenia30.top/2019/11/05/Linux基础学习笔记-文件与目录管理/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/12/Linux学习笔记-账号管理/"><i class="fa fa-chevron-left">  </i><span>Linux基础学习笔记-账号管理</span></a></div><div class="next-post pull-right"><a href="/2019/11/02/Linux基础学习笔记-文件权限/"><span>Linux基础学习笔记-文件权限</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By Gard3nia</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Just keep moving!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
