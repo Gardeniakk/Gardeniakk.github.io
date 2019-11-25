@@ -1,0 +1,216 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Linux基础学习笔记-账号管理"><meta name="keywords" content="Linux"><meta name="author" content="Gard3nia"><meta name="copyright" content="Gard3nia"><title>Linux基础学习笔记-账号管理 | Gard3nia's Notebook</title><link rel="shortcut icon" href="/rea.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux账号管理与ACL权限设置"><span class="toc-number">2.</span> <span class="toc-text">Linux账号管理与ACL权限设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux账号与用户组"><span class="toc-number">2.1.</span> <span class="toc-text">linux账号与用户组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户标识符：UID和GID"><span class="toc-number">2.1.1.</span> <span class="toc-text">用户标识符：UID和GID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户账号"><span class="toc-number">2.1.2.</span> <span class="toc-text">用户账号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#拿到shell的过程"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">拿到shell的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etc-passwd结构"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">/etc/passwd结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etc-shadow结构"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">/etc/shadow结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于用户组"><span class="toc-number">2.1.3.</span> <span class="toc-text">关于用户组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#etc-group结构"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">/etc/group结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有效用户组和初始用户组"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">有效用户组和初始用户组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#etc-gshadow"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">/etc/gshadow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#账号管理"><span class="toc-number">2.2.</span> <span class="toc-text">账号管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增与删除用户"><span class="toc-number">2.2.1.</span> <span class="toc-text">新增与删除用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#usreadd"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">usreadd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useradd的参考文件"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">useradd的参考文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#passwd"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">passwd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chage"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">chage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#usermod"><span class="toc-number">2.2.1.5.</span> <span class="toc-text">usermod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#userdel"><span class="toc-number">2.2.1.6.</span> <span class="toc-text">userdel</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户功能"><span class="toc-number">2.2.2.</span> <span class="toc-text">用户功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#id"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">id</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#finger"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">finger</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chfn"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">chfn</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chsh"><span class="toc-number">2.2.2.4.</span> <span class="toc-text">chsh</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增与删除用户组"><span class="toc-number">2.2.3.</span> <span class="toc-text">新增与删除用户组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#groupadd"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">groupadd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#groupmod"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">groupmod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#groupdel"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">groupdel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gpasswd"><span class="toc-number">2.2.3.4.</span> <span class="toc-text">gpasswd</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ACL的使用"><span class="toc-number">2.3.</span> <span class="toc-text">ACL的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户身份切换"><span class="toc-number">2.4.</span> <span class="toc-text">用户身份切换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#su"><span class="toc-number">2.4.1.</span> <span class="toc-text">su</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sudo"><span class="toc-number">2.4.2.</span> <span class="toc-text">sudo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户特殊的shell和PAM模块"><span class="toc-number">2.5.</span> <span class="toc-text">用户特殊的shell和PAM模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux主机上的用户信息传递"><span class="toc-number">2.6.</span> <span class="toc-text">Linux主机上的用户信息传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查询用户"><span class="toc-number">2.6.1.</span> <span class="toc-text">查询用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#w和who"><span class="toc-number">2.6.1.1.</span> <span class="toc-text">w和who</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#last和lastlog"><span class="toc-number">2.6.1.2.</span> <span class="toc-text">last和lastlog</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户对谈"><span class="toc-number">2.6.2.</span> <span class="toc-text">用户对谈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#write"><span class="toc-number">2.6.2.1.</span> <span class="toc-text">write</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mesg"><span class="toc-number">2.6.2.2.</span> <span class="toc-text">mesg</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wall"><span class="toc-number">2.6.2.3.</span> <span class="toc-text">wall</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Gard3nia</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">22</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">18</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">friendlinks</div><a class="author-info-links__name text-center" href="https://skysec.top">一叶飘零学长</a><a class="author-info-links__name text-center" href="https://0verwatch.top/">0verwatch</a><a class="author-info-links__name text-center" href="http://chaosec.top/">瑞雪师傅</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/05/26/VE5mHf.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Gard3nia's Notebook</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">归档</a><a class="site-page" href="/about">简介</a></span></div><div id="post-info"><div id="post-title">Linux基础学习笔记-账号管理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux基础/">Linux基础</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">3.9k</span><span class="post-meta__separator">|</span><span>Reading time: 13 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>以下是关于Linux用户和用户组的内容。<a id="more"></a></p>
+<h1 id="Linux账号管理与ACL权限设置"><a href="#Linux账号管理与ACL权限设置" class="headerlink" title="Linux账号管理与ACL权限设置"></a>Linux账号管理与ACL权限设置</h1><h2 id="linux账号与用户组"><a href="#linux账号与用户组" class="headerlink" title="linux账号与用户组"></a>linux账号与用户组</h2><h3 id="用户标识符：UID和GID"><a href="#用户标识符：UID和GID" class="headerlink" title="用户标识符：UID和GID"></a>用户标识符：UID和GID</h3><p>用户ID（User ID）为UID              UID与账号的对应就在/etc/passwd中</p>
+<p>用户组ID（Group ID）为GID       GID与组的对应在/etc/group中</p>
+<h3 id="用户账号"><a href="#用户账号" class="headerlink" title="用户账号"></a>用户账号</h3><h4 id="拿到shell的过程"><a href="#拿到shell的过程" class="headerlink" title="拿到shell的过程"></a>拿到shell的过程</h4><p>Linux上的用户登录主机获取shell是如何进行的？首先必须要利用tty1~tty6的终端提供的登录接口，输入用户名和密码才能登录，通过网络登录则需要ssh功能，系统后台的处理过程：</p>
+<ol>
+<li><p>查找/etc/passwd里面是否有账号，没有就退出，有的话就将该用户的UID和GID(etc/group)读出来，家目录和shell也读出</p>
+</li>
+<li><p>接下来就是核对密码表。在/etc/shadow里查找出同一个UID，然后核对刚刚输入的密码是否一致</p>
+</li>
+<li><p>一切顺利就进入shell</p>
+</li>
+</ol>
+<h4 id="etc-passwd结构"><a href="#etc-passwd结构" class="headerlink" title="/etc/passwd结构"></a>/etc/passwd结构</h4><p>每一行代表一个账户，里面有许多本来系统运行所必须的账号，简称系统账户，例如bin，adm，nobody…每一行用分号分开，每一部分代表的内容都不一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>账户名称</p>
+</li>
+<li><p>密码</p>
+<p>早期的unix将密码放在这个字段，由于安全性，现在放在shadow里，所以用x代替</p>
+</li>
+<li><p>UID</p>
+<p>0：系统管理员</p>
+<p>1~999：系统账号</p>
+<p>​               1~200:linux自己建立的系统账号</p>
+<p>​               201~999:用户创建的系统账户</p>
+<p>1000~60000：一般用户账号</p>
+</li>
+<li><p>GID</p>
+<p>与/etc/group有关，所属组的id</p>
+</li>
+<li><p>用户信息说明</p>
+</li>
+<li><p>家目录</p>
+</li>
+<li><p>用户默认获取的shell</p>
+</li>
+</ol>
+<h4 id="etc-shadow结构"><a href="#etc-shadow结构" class="headerlink" title="/etc/shadow结构"></a>/etc/shadow结构</h4><p>程序的运行与权限有关，权限与GID和UID有关，所以程序需要读取/etc/passwd来了解不同用户的权限，所以passwd的权限必须要设置成<code>-rw-r--r--</code>，这时如果密码还是放在passwd里面，就会造成密文的泄露，所以需要将密码的密文单独移动到shadow里面，shadow的权限默认为<code>-rw-------</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root:$6$KaRerEYG$TjxFjDPsKL6m7jYzTwXsekXjt4i2a56zhxslPozbfXRKKv7CcUh2A43F.C8QfrN/riCzJIoOrjyvsLXNEuD1V/:18049:0:99999:7:::</span><br><span class="line"></span><br><span class="line">gard3nia:$6$AscHmt6SqDOyCv1p$VKdcxkNdVFDQiCgWpqhKlmSTBt8IEHz.VH5zKQn8ExZSNoqr/rsOj5q39g7d5GQgg98/n7DB53oNxntx/fJTq0::0:99999:7:::</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>账户</p>
+</li>
+<li><p>密码密文</p>
+</li>
+<li><p>最近修改密码的日期：距离1970/01/01的日期</p>
+</li>
+<li><p>密码不可被修改的天数</p>
+<p>在最近一次修改密码以后经过多久不能修改密码</p>
+</li>
+<li><p>密码需要重新修改的天数</p>
+<p>强制用户修改密码</p>
+</li>
+<li><p>密码需要修改期限前的警告天数</p>
+<p>密码有效期快要到的时候，系统会发出警告给用户</p>
+</li>
+<li><p>密码过期以后的宽限天数</p>
+<p>如果密码过期，在宽限天数以内可以被强制修改密码然后登陆</p>
+</li>
+<li><p>账号失效的日期，无论密码是否失效，都会账户失效，依旧是距离1970/01/01的天数</p>
+</li>
+<li><p>保留功能</p>
+</li>
+</ol>
+<h3 id="关于用户组"><a href="#关于用户组" class="headerlink" title="关于用户组"></a>关于用户组</h3><h4 id="etc-group结构"><a href="#etc-group结构" class="headerlink" title="/etc/group结构"></a>/etc/group结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:  </span><br><span class="line">bin:x:1:   </span><br><span class="line">daemon:x:2:</span><br><span class="line">sys:x:3:   </span><br><span class="line">adm:x:4:</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>组名</p>
+</li>
+<li><p>用户组密码</p>
+<p>给组的管理员使用，目前很少使用</p>
+</li>
+<li><p>GID</p>
+</li>
+<li><p>此用户组支持的账号名称</p>
+<p>一个账号可以加入多个用户组，如果某个账号想要加入此用户组，将该用户填入这个字段即可</p>
+</li>
+</ol>
+<p><strong>三个文件中相关参数的联系：</strong></p>
+<p><img src="https://s2.ax1x.com/2019/11/11/MM0eJ0.png" alt="MM0eJ0.png"></p>
+<h4 id="有效用户组和初始用户组"><a href="#有效用户组和初始用户组" class="headerlink" title="有效用户组和初始用户组"></a>有效用户组和初始用户组</h4><p>在学用户组和用户的时候，用户可以加入任意多个用户组，这么多用户组有什么区别呢？？？</p>
+<p><strong>初始用户组</strong></p>
+<p>在/etc/passwd的第四栏有一个GID，那个GID就是初始用户组的ID，用户登录系统立刻就会有这个用户组的相关权限。因为是初始用户组，所以用户一登录就会主动获取，不需要在/etc/group的第四个字段写入该账号。</p>
+<p><strong>非初始用户组</strong></p>
+<p>但是如果是非初始用户组的其他用户组，必须要在/etc/group这个文件中的找到该组，在其第四栏添加上该用户的用户名。</p>
+<p><strong>有效用户组</strong></p>
+<p>如果用户建立一个新的文件或者目录，新文件的用户组到底是哪一个？？？</p>
+<ul>
+<li><p>groups：有效与支持用户组的观察</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ groups</span><br><span class="line">gard3nia wheel docker</span><br></pre></td></tr></table></figure>
+<p>从结果里面可以看出gard3nia属于三个用户组gard3nia wheel docker，第一个输出的用户组就为有效用户组，也就是说有效用户组为gard3nia</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ ls -l 1.txt</span><br><span class="line">-rw-rw-r--. 1 gard3nia gard3nia 0 Nov  9 10:45 1.txt</span><br></pre></td></tr></table></figure>
+<p>新建文件后发现用户组确实为gard3nia</p>
+</li>
+<li><p>newgrp：有效用户组的切换</p>
+<p>使用这个命令有个前提就是：<strong>你想要切换的用户组必须要是你已经有支持的用户组</strong>。也就是说上面的gard3nia用户组可以切换为wheel和docker用户组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ newgrp docker</span><br><span class="line">[gard3nia@localhost ~]$ groups</span><br><span class="line">docker wheel gard3nia</span><br></pre></td></tr></table></figure>
+<p>额外讨论newgrp：</p>
+<p>这个命令可以切换当前用户的有效用户组，而且是另外以一个shell来提供这个功能</p>
+<p><img src="https://s2.ax1x.com/2019/11/11/MQPZrR.png" alt="MQPZrR.png"></p>
+<p>所以上述的gard3nia相当于目前是以另一个shell登录的，而且新的shell给gard3nia有效的GID为docker，用户的用户组权限将会被重新计算，退出直接exit即可回到原来的环境。</p>
+<h4 id="etc-gshadow"><a href="#etc-gshadow" class="headerlink" title="/etc/gshadow"></a>/etc/gshadow</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ sudo head -n 4 /etc/gshadow</span><br><span class="line">[sudo] password <span class="keyword">for</span> gard3nia:</span><br><span class="line">root:::</span><br><span class="line">bin:::</span><br><span class="line">daemon:::</span><br><span class="line">sys:::</span><br><span class="line">...</span><br><span class="line">gard3nia:!!::gard3nia</span><br><span class="line">nginx:!::</span><br><span class="line">cgred:!::</span><br><span class="line">dockerroot:!::</span><br><span class="line">docker:!::gard3nia</span><br><span class="line">apache:!::</span><br><span class="line">slocate:!::</span><br></pre></td></tr></table></figure>
+<p>几乎和group文件相同，需要注意的是第二栏目，如果为空或者为！时，表示该用户组不具有用户组管理员。每个字段表示的内容：</p>
+<ol>
+<li>组名</li>
+<li>密码栏：开头为！的表示无合法密码，所以没有用户组管理员</li>
+<li>用户组管理员的账号</li>
+<li>有加入该用户组支持的所属账号</li>
+</ol>
+<p>这个gshadow的最大功能就是建立用户组管理员，root平时太忙的时候，改用户组管理员就可以将需要服务的用户的账号加入到自己管理的用户组里面进行管理，由于sudo的出现，现在这个功能已经很少使用。</p>
+</li>
+</ul>
+<h2 id="账号管理"><a href="#账号管理" class="headerlink" title="账号管理"></a>账号管理</h2><h3 id="新增与删除用户"><a href="#新增与删除用户" class="headerlink" title="新增与删除用户"></a>新增与删除用户</h3><h4 id="usreadd"><a href="#usreadd" class="headerlink" title="usreadd"></a>usreadd</h4><p>useradd的参数特别多，这里列出几个常用的…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-u UID</span><br><span class="line">-g 初始用户组</span><br><span class="line">-G 次要用户组</span><br><span class="line">-d 家目录绝对路径</span><br><span class="line">-s 登录获取的shell类型</span><br><span class="line">-r 创建系统账户</span><br></pre></td></tr></table></figure>
+<p><strong>一般账号</strong></p>
+<p>系统已经帮我们设置了好多默认的值了，所以可以简单地使用useradd+用户名来建立用户，系统会默认帮你处理下面几个选项：</p>
+<ol>
+<li>在/etc/passwd里面建立一条与用户相关的数据，包括建立UID,GID,家目录等等</li>
+<li>在/etc/shadow里面将此账号的密码相关参数写入，但是还没有密码</li>
+<li>在/etc/group里面加入一个与账户名称一样的组名</li>
+<li>在/home下面建立家目录，权限为700</li>
+</ol>
+<p>这时还没有设置密码，所以还需要使用<code>passwd+用户名</code>的方法设置密码。</p>
+<p><strong>系统账号</strong></p>
+<p>系统账号的UID一般都是在1000号以下，加上-r参数就可以直接建立一个系统账户。系统账号主要是用来执行系统所需服务的权限设置，所以系统账号默认都不会主动建立家目录</p>
+<h4 id="useradd的参考文件"><a href="#useradd的参考文件" class="headerlink" title="useradd的参考文件"></a>useradd的参考文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ useradd -D</span><br><span class="line">GROUP=100</span><br><span class="line">HOME=/home</span><br><span class="line">INACTIVE=-1</span><br><span class="line">EXPIRE=</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">SKEL=/etc/skel</span><br><span class="line">CREATE_MAIL_SPOOL=yes</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>GROUP=100，新建账号的初始用户组使用GID为100</p>
+<ul>
+<li><p>私有用户组机制</p>
+<p>系统会建立一个与账号一样的用户组给用户作为初始用户组，这种用户组设置机制会比较有保密性，因为每个用户都会有自己的用户组，而且家目录权限还是700；</p>
+</li>
+<li><p>公共用户组机制</p>
+<p>以上面的GROUP=100设置值作为新建用户的初始用户组，每个用户都属于users这个用户组，默认家目录的权限是755，大家共享家目录内的数据。</p>
+</li>
+</ul>
+</li>
+<li><p>HOME=/home，用户家目录的基准目录</p>
+</li>
+<li><p>INACTIVE=-1，密码过期以后是否会失效的设置值，如果是-1代表密码永远不会失效；0代表密码过期立刻失效；如果是30，则代表过期后30天后才失效。</p>
+</li>
+<li><p>SHELL=/bin/bash，获取的shell</p>
+</li>
+<li><p>EXPIRE=，shadow的第八个字段，即账号失效的日期</p>
+</li>
+<li><p>SKEL=/etc/skel，用户家目录参考基准目录</p>
+</li>
+<li><p>CREATE_MAIL_SPOOL=yes，建立用户的mailbox…</p>
+</li>
+</ul>
+<h4 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h4><p>用useradd创建账号以后，在默认的状况下，该账号是锁定的，必须要用passwd来设置密码；</p>
+<p>passwd的参数很多，可用–help自行查看，root用户修改密码不需要输入历史密码…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">passwd+用户名：帮助特定用户修改密码</span><br><span class="line">passwd：自己修改自己的密码</span><br><span class="line">passwd -S可以列出密码相关参数，看出加密是使用了sha512；</span><br><span class="line">passwd -l可以在shadow的密码位置前面加上！使得密码失效，起到lock的作用</span><br><span class="line">passwd -u解锁</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ sudo passwd -S gard3nia</span><br><span class="line">[sudo] password <span class="keyword">for</span> gard3nia:</span><br><span class="line">gard3nia PS 1969-12-30 0 99999 7 -1 (Password <span class="built_in">set</span>, SHA512 crypt.)</span><br></pre></td></tr></table></figure>
+<h4 id="chage"><a href="#chage" class="headerlink" title="chage"></a>chage</h4><p>运用passwd -S查询到的信息很少，更详细的密码参数显示功能需要使用chage：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ chage -l gard3nia</span><br><span class="line">Last password change                                    : never</span><br><span class="line">Password expires                                        : never</span><br><span class="line">Password inactive                                       : never</span><br><span class="line">Account expires                                         : never</span><br><span class="line">Minimum number of days between password change          : 0</span><br><span class="line">Maximum number of days between password change          : 99999</span><br><span class="line">Number of days of warning before password expires       : 7</span><br></pre></td></tr></table></figure>
+<p>更多的参数可以修改密码的一些参数，自行–help</p>
+<h4 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h4><p>在useradd的时候设置错了参数，可以使用usermod来进行补救，基本上参数有很多是和useradd是一致的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-d 修改家目录</span><br><span class="line">-e 接日期，修改shadow第八栏</span><br><span class="line">-f 接天数，修改shadow第七栏</span><br><span class="line">-g 接初始用户组，修改passwd的GID</span><br><span class="line">-G 接次要用户组，修改group</span><br><span class="line">-a 与-G合用，增加次要用户组</span><br><span class="line">-l 接账户名称，即修改账户名称</span><br><span class="line">-s 修改默认shell</span><br><span class="line">-u 修改UID</span><br><span class="line">-L LOCK</span><br><span class="line">-U UNLOCK</span><br></pre></td></tr></table></figure>
+<h4 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h4><p>删除用户的相关数据，数据有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户账号，密码相关数据：/etc/passwd  /etc/shadow</span><br><span class="line">用户组相关参数：/etc/group  /etc/gshadow</span><br><span class="line">用户个人文件数据：/home/name  /var/spool/mail/name</span><br></pre></td></tr></table></figure>
+<p>参数也非常简单，加上-r连同使用者家目录一起删除：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel -r username</span><br></pre></td></tr></table></figure>
+<p>这样做一般不会将用户的数据抹除干净，最好在执行userdel之前，进行<code>find / -user name</code>进行删除…</p>
+<h3 id="用户功能"><a href="#用户功能" class="headerlink" title="用户功能"></a>用户功能</h3><p>useradd，userdel，usermod都是系统管理员才可以使用的命令，如果是一般身份，也有权限来修改除了密码以外的一些参数。</p>
+<h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><p>可以查询某人或者自己的相关UID/GID信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ id</span><br><span class="line">uid=1000(gard3nia) gid=1000(gard3nia) groups=1000(gard3nia),10(wheel),1001(docker) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br></pre></td></tr></table></figure>
+<h4 id="finger"><a href="#finger" class="headerlink" title="finger"></a>finger</h4><p>指纹…可以查看很多用户相关的信息。大部分都是/etc/passwd里面的数据，危险命令，已经不默认安装…</p>
+<p>没安装成功，暂且搁置…</p>
+<h4 id="chfn"><a href="#chfn" class="headerlink" title="chfn"></a>chfn</h4><p>像是change finger…没什么卵用…</p>
+<h4 id="chsh"><a href="#chsh" class="headerlink" title="chsh"></a>chsh</h4><p>change shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chsh [-ls]</span><br><span class="line">-l 列出所有可用shell</span><br><span class="line">-s 修改自己的shell</span><br></pre></td></tr></table></figure>
+<h3 id="新增与删除用户组"><a href="#新增与删除用户组" class="headerlink" title="新增与删除用户组"></a>新增与删除用户组</h3><p>基本上这部分的操作是与/etc/group和/etc/gshadow有关</p>
+<h4 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g 后面接上GID表示设置某个GID</span><br><span class="line">-r 建立系统用户组</span><br></pre></td></tr></table></figure>
+<h4 id="groupmod"><a href="#groupmod" class="headerlink" title="groupmod"></a>groupmod</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g 修改既有的GID数字</span><br><span class="line">-n 修改既有的用户组名称</span><br></pre></td></tr></table></figure>
+<h4 id="groupdel"><a href="#groupdel" class="headerlink" title="groupdel"></a>groupdel</h4><p>如果有某个账号的初始用户组使用该用户组，则该用户组不可删除</p>
+<p>删除前必须要确保/etc/passwd里面的用户没有任何人使用该用户组作为初始用户组</p>
+<h4 id="gpasswd"><a href="#gpasswd" class="headerlink" title="gpasswd"></a>gpasswd</h4><p>用户组管理员功能，如果系统管理员太忙碌，导致某些账号需要帮助时没有人，这时就可以建立用户组管理员</p>
+<h2 id="ACL的使用"><a href="#ACL的使用" class="headerlink" title="ACL的使用"></a>ACL的使用</h2><p>暂且搁置…</p>
+<h2 id="用户身份切换"><a href="#用户身份切换" class="headerlink" title="用户身份切换"></a>用户身份切换</h2><p>为了安全，要尽量使用一般身份的用户来进行linux的日常作业。等到需要设置系统环境的时候，再切换成root来进行管理，这样相对来说比较安全，避免出现低级失误如：<code>rm -rf /</code></p>
+<h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>su是最简单的身份切换命令，可以进行任何身份的切换，参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-  单纯的su -代表使用login-shell的变量文件读取方式来登录系统</span><br><span class="line">-l 与-类似，后面需要加上欲切换的使用者的账户，也是login-shell方式</span><br><span class="line">-m 表示使用目前的环境设置，不读取新的使用者的配置文件</span><br><span class="line">-c 仅仅执行一次命令，加命令即可</span><br></pre></td></tr></table></figure>
+<p><strong>su和su -的区别：</strong></p>
+<p>单纯使用su会切换成root的身份，读取的变量设置方式为非登陆shell的方式，这种方式很多原本的变量不会被修改，例如$PATH和家目录的路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ su</span><br><span class="line">Password:</span><br><span class="line">[root@localhost gard3nia]<span class="comment"># pwd</span></span><br><span class="line">/home/gard3nia</span><br><span class="line">[root@localhost gard3nia]<span class="comment"># echo $PATH</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:/home/gard3nia/.<span class="built_in">local</span>/bin:/home/gard3nia/bin</span><br></pre></td></tr></table></figure>
+<p>但是如果使用su -就会完全切换为root的环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[gard3nia@localhost ~]$ su -                                          </span><br><span class="line">Password:                                                             </span><br><span class="line">Last login: Sat Nov  9 15:49:32 EST 2019 on pts/0                     </span><br><span class="line">[root@localhost ~]<span class="comment"># pwd                                               </span></span><br><span class="line">/root                                                                 </span><br><span class="line">[root@localhost ~]<span class="comment"># echo $PATH                                        </span></span><br><span class="line">/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</span><br></pre></td></tr></table></figure>
+<p>其实单单使用su命令只是切换了root的身份，但是当前的shell环境还是刚刚的一般用户的shell环境，而su -命令使用后会将用户身份和shell环境一起切换为root，所以一般还是使用su -来进行身份的切换</p>
+<p>虽然su很方便，但是当很多人公用环境时，大家都需要使用su来切换成root，每个人都要知道root的密码，这样很不妥，所以就需要sudo；</p>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>su需要的是root用户的密码，而sudo的使用只需要自己的密码。由于sudo可以让你以其他用户的身份执行命令（通常是root），因此并非所有人都能执行sudo，只有规范到/etc/sudoers内的用户才可以执行sudo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo [-b] [-u 账号]</span><br><span class="line">-b 将后续的命令放到系统后台执行，不与目前的shell产生影响</span><br><span class="line">-u 后面加上需要切换的使用者，没有这一项代表切换root</span><br></pre></td></tr></table></figure>
+<p>sudo可以让你切换身份去进行某项任务，执行流程如下：</p>
+<ol>
+<li>执行sudo后，系统于/etc/sudoers里面查找该用户是否有执行sudo的权限</li>
+<li>若用户具有可执行sudo的权限后，便让用户输入自己的密码来确认</li>
+<li>如果密码正确，就开始执行后续命令</li>
+<li>想要切换的身份和执行者相同，也不需要输入密码</li>
+</ol>
+<p>所以关于/etc/sudoers的内容是非常重要的，一般不会采用vi的方法去修改这个文件的内容，因为该文件有一定的语法规律，不符合语法是不可以运行的，一般采用的是visudo命令。</p>
+<p><strong>visudo</strong></p>
+<p>其实visudo也就是用vi将sudoers的内容调出来而已 ，去添加你想要添加的用户和用户组即可</p>
+<h2 id="用户特殊的shell和PAM模块"><a href="#用户特殊的shell和PAM模块" class="headerlink" title="用户特殊的shell和PAM模块"></a>用户特殊的shell和PAM模块</h2><p>开坑…</p>
+<h2 id="Linux主机上的用户信息传递"><a href="#Linux主机上的用户信息传递" class="headerlink" title="Linux主机上的用户信息传递"></a>Linux主机上的用户信息传递</h2><h3 id="查询用户"><a href="#查询用户" class="headerlink" title="查询用户"></a>查询用户</h3><h4 id="w和who"><a href="#w和who" class="headerlink" title="w和who"></a>w和who</h4><p>查询当前登录在系统的用户</p>
+<h4 id="last和lastlog"><a href="#last和lastlog" class="headerlink" title="last和lastlog"></a>last和lastlog</h4><p>last可以列出从系统建立之后到目前为止的所有登陆者信息</p>
+<p>lastlog可以列出每个账户最近登录的时间</p>
+<h3 id="用户对谈"><a href="#用户对谈" class="headerlink" title="用户对谈"></a>用户对谈</h3><h4 id="write"><a href="#write" class="headerlink" title="write"></a>write</h4><p>write+对方用户名+对方终端界面 可以做到向对面的shell传输信息的功能</p>
+<h4 id="mesg"><a href="#mesg" class="headerlink" title="mesg"></a>mesg</h4><p>mesg n 可以设置不接受任何信息</p>
+<h4 id="wall"><a href="#wall" class="headerlink" title="wall"></a>wall</h4><p>wall+信息 广播给用户信息</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Gard3nia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://gardenia30.top/2019/11/12/Linux基础学习笔记-账号管理/">https://gardenia30.top/2019/11/12/Linux基础学习笔记-账号管理/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/11/16/Linux基础学习笔记-进程管理/"><i class="fa fa-chevron-left">  </i><span>Linux基础学习笔记-进程管理</span></a></div><div class="next-post pull-right"><a href="/2019/11/07/Linux基础学习笔记-文件压缩/"><span>Linux基础学习笔记-文件压缩</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By Gard3nia</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Just keep moving!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
