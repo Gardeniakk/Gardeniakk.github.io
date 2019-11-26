@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Linux网络学习笔记-网络安全和主机基本防护"><meta name="keywords" content="Linux"><meta name="author" content="Gard3nia"><meta name="copyright" content="Gard3nia"><title>Linux网络学习笔记-网络安全和主机基本防护 | Gard3nia's Notebook</title><link rel="shortcut icon" href="/rea.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络数据包连接进入主机的流程"><span class="toc-number">2.</span> <span class="toc-text">网络数据包连接进入主机的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据包进入主机的流程"><span class="toc-number">2.1.</span> <span class="toc-text">数据包进入主机的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-经过防火墙"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.经过防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-服务的基本功能"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.服务的基本功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-SELinux对网络服务的权限控制"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.SELinux对网络服务的权限控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-使用主机的文件系统资源"><span class="toc-number">2.1.4.</span> <span class="toc-text">4.使用主机的文件系统资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见攻击手法和相关保护"><span class="toc-number">2.2.</span> <span class="toc-text">常见攻击手法和相关保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-嗅探账户和密码"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.嗅探账户和密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-利用系统漏洞程序"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.利用系统漏洞程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-社工"><span class="toc-number">2.2.3.</span> <span class="toc-text">3.社工</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-DDOS"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.DDOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-主要的防御手段"><span class="toc-number">2.2.5.</span> <span class="toc-text">5.主要的防御手段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#限制连接端口"><span class="toc-number">3.</span> <span class="toc-text">限制连接端口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是port"><span class="toc-number">3.1.</span> <span class="toc-text">什么是port</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端口的查看"><span class="toc-number">3.2.</span> <span class="toc-text">端口的查看</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-netstat"><span class="toc-number">3.2.1.</span> <span class="toc-text">1.netstat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-nmap"><span class="toc-number">3.2.2.</span> <span class="toc-text">2.nmap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端口与服务的启动-关闭及开机时状态设定"><span class="toc-number">3.3.</span> <span class="toc-text">端口与服务的启动/关闭及开机时状态设定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-stand-alone和super-daemon"><span class="toc-number">3.3.1.</span> <span class="toc-text">1.stand alone和super daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-默认启动的服务"><span class="toc-number">3.3.2.</span> <span class="toc-text">2.默认启动的服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SELinux管理原则"><span class="toc-number">4.</span> <span class="toc-text">SELinux管理原则</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Gard3nia</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">23</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">18</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">friendlinks</div><a class="author-info-links__name text-center" href="https://skysec.top">一叶飘零学长</a><a class="author-info-links__name text-center" href="https://0verwatch.top/">0verwatch</a><a class="author-info-links__name text-center" href="http://chaosec.top/">瑞雪师傅</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/05/26/VE5mHf.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Gard3nia's Notebook</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">时间轴</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">归档</a><a class="site-page" href="/about">简介</a></span></div><div id="post-info"><div id="post-title">Linux网络学习笔记-网络安全和主机基本防护</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-25</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux网络/">Linux网络</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.6k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Linux security<a id="more"></a></p>
+<h1 id="网络数据包连接进入主机的流程"><a href="#网络数据包连接进入主机的流程" class="headerlink" title="网络数据包连接进入主机的流程"></a>网络数据包连接进入主机的流程</h1><h2 id="数据包进入主机的流程"><a href="#数据包进入主机的流程" class="headerlink" title="数据包进入主机的流程"></a>数据包进入主机的流程</h2><p><img src="https://s2.ax1x.com/2019/11/25/Mvfd1g.png" alt="Mvfd1g.png"></p>
+<h3 id="1-经过防火墙"><a href="#1-经过防火墙" class="headerlink" title="1.经过防火墙"></a>1.经过防火墙</h3><p>你的连接能不能成功首先需要通过防火墙。默认的Linux防火墙就有两个机制，独立存在。因此默认我们就有两层防火墙：第一层是数据包过滤式的Net Filter防火墙；第二层则是通过软件管理的TCP Wrappers防火墙。</p>
+<ul>
+<li><p>第一层：数据包过滤防火墙</p>
+<p>要进入Linux本机的数据包都会先通过Linux内核的预设防火墙Net Filter。其实就是iptables这个软件所提供的防火墙功能。为何称为包过滤防火墙？因为它主要是针对TCP/IP的数据包头来进行过滤的机制，主要控制的是<code>MAC,IP,ICMP,  TCP,UDP的端口与状态</code></p>
+</li>
+<li><p>第二层：TCP Wrappers</p>
+<p>实际上就是<code>/etc/hosts.allow</code>和<code>/etc/hosts.deny</code>的配置文件功能，针对TCP的Header进行再次分析，可以设置一些机制来过滤某些IP或者port。</p>
+</li>
+</ul>
+<h3 id="2-服务的基本功能"><a href="#2-服务的基本功能" class="headerlink" title="2.服务的基本功能"></a>2.服务的基本功能</h3><p>内置的防火墙是Linux的内建功能，防火墙主要管理<code>MAC,IP,PORT</code>等数据包头部信息。如果想限制某些目录的权限，就需要通过权限以及服务器软件提供的相关功能实现了。</p>
+<h3 id="3-SELinux对网络服务的权限控制"><a href="#3-SELinux对网络服务的权限控制" class="headerlink" title="3.SELinux对网络服务的权限控制"></a>3.SELinux对网络服务的权限控制</h3><p>为了避免权限误用，或者是程序问题造成的安全问题，就需要SELinux了，它可以针对网络服务设置一些规则，让程序拥有的权限非常有限，即使配置失误，拥有的是root权限，该程序的执行操作也是被限制的。</p>
+<h3 id="4-使用主机的文件系统资源"><a href="#4-使用主机的文件系统资源" class="headerlink" title="4.使用主机的文件系统资源"></a>4.使用主机的文件系统资源</h3><p>浏览器连接到WWW的目的就是获取文件。网络数据包最终是要向主机获取文件系统数据的。这里假设使用httpd来获取系统的文件数据，但是httpd默认是由一个系统账户httpd来启动的，所以，你的网页数据权限就是要让这个程序可读才行。</p>
+<h2 id="常见攻击手法和相关保护"><a href="#常见攻击手法和相关保护" class="headerlink" title="常见攻击手法和相关保护"></a>常见攻击手法和相关保护</h2><h3 id="1-嗅探账户和密码"><a href="#1-嗅探账户和密码" class="headerlink" title="1.嗅探账户和密码"></a>1.嗅探账户和密码</h3><p>常规的信息收集，指纹识别…..最后爆破密码</p>
+<p>解决办法：</p>
+<ul>
+<li>减少信息的暴露</li>
+<li>建立较严格的密码设置规则</li>
+<li>完善权限设置</li>
+</ul>
+<h3 id="2-利用系统漏洞程序"><a href="#2-利用系统漏洞程序" class="headerlink" title="2.利用系统漏洞程序"></a>2.利用系统漏洞程序</h3><p>网络软件漏洞或者系统漏洞让hacker拿到shell，甚至可以提权为root</p>
+<p>解决办法：</p>
+<ul>
+<li>关闭不需要的网络服务</li>
+<li>保持更新</li>
+<li>关闭不需要的软件</li>
+</ul>
+<h3 id="3-社工"><a href="#3-社工" class="headerlink" title="3.社工"></a>3.社工</h3><p>钓鱼…人的问题</p>
+<h3 id="4-DDOS"><a href="#4-DDOS" class="headerlink" title="4.DDOS"></a>4.DDOS</h3><p>不是入侵你的系统，而是要让你的系统无法正常提供服务，小网站基本不太可能…主要的攻击手段是各类泛洪攻击</p>
+<h3 id="5-主要的防御手段"><a href="#5-主要的防御手段" class="headerlink" title="5.主要的防御手段"></a>5.主要的防御手段</h3><ol>
+<li>建立完善的登录密码规则</li>
+<li>完善的主机权限设置</li>
+<li>设置自动升级和修补软件漏洞，移除危险软件</li>
+<li>强化安全设置的项目</li>
+<li>利用iptables等防火墙强化</li>
+<li>利用主机监控软件来分析主机状况和日志文件</li>
+</ol>
+<h1 id="限制连接端口"><a href="#限制连接端口" class="headerlink" title="限制连接端口"></a>限制连接端口</h1><h2 id="什么是port"><a href="#什么是port" class="headerlink" title="什么是port"></a>什么是port</h2><p>启动一个网络服务，这个服务会依据TCP/IP的相关通讯协议启动一个端口进行监听，那就是TCP/UDP数据包的端口。网络连接由于是双向的，所以服务器端需要启动一个监听的端口，客户端也需要随机启动一个端口来接收响应的数据。</p>
+<ul>
+<li><p>服务器端启动的监听端口是固定的</p>
+</li>
+<li><p>客户端启动程序时，随机启动一个大于1024的端口</p>
+</li>
+<li><p>一台服务器可以同时提供多种服务</p>
+</li>
+<li><p>一共有65536个port</p>
+<p>由于TCP/UDP报头数据中可以知道port占据16位，所以主机才会有65536个port</p>
+<ul>
+<li>只有root才能启动保留的port</li>
+<li>大于1024用于client端的port</li>
+</ul>
+</li>
+<li><p>建立可靠的服务需要TCP协议，也就需要三次握手。如果是面向非连接的，使用UDP即可。</p>
+</li>
+<li><p>通信协议可以启用在非正规的端口</p>
+</li>
+</ul>
+<h2 id="端口的查看"><a href="#端口的查看" class="headerlink" title="端口的查看"></a>端口的查看</h2><h3 id="1-netstat"><a href="#1-netstat" class="headerlink" title="1.netstat"></a>1.netstat</h3><p><strong>列出正在监听的网络服务</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunl</span><br></pre></td></tr></table></figure>
+<p><strong>列出已连接的网络连接状态</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tun</span><br></pre></td></tr></table></figure>
+<p><strong>删除已建立或者在监听中的连接</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunp</span><br></pre></td></tr></table></figure>
+<p>找到pid以后直接kill掉即可</p>
+<h3 id="2-nmap"><a href="#2-nmap" class="headerlink" title="2.nmap"></a>2.nmap</h3><p>是一个经常使用的扫描工具，在此不作赘述</p>
+<h2 id="端口与服务的启动-关闭及开机时状态设定"><a href="#端口与服务的启动-关闭及开机时状态设定" class="headerlink" title="端口与服务的启动/关闭及开机时状态设定"></a>端口与服务的启动/关闭及开机时状态设定</h2><p>port其实是在执行某些软件之后被软件激活的，所以要关闭某些端口，直接将软件关闭即可。关闭的方法可以使用kill，但是不是正统的办法，想要正确关闭，需要使用系统提供的script即可。</p>
+<h3 id="1-stand-alone和super-daemon"><a href="#1-stand-alone和super-daemon" class="headerlink" title="1.stand alone和super daemon"></a>1.stand alone和super daemon</h3><ul>
+<li>stand alone：就是直接执行该服务的执行文件，让该执行文件直接加载到内存中运行。可以让该服务具有较快速的响应。一般来说这种方式启动的script都会放到<code>/etc/init.d</code>这个目录下面。平时可以使用<code>/etc/init.d/sshd restart</code>这类方式来重新启动这种服务。</li>
+<li>super daemon：用一个超级服务来统一管理某些特殊服务。用的是xinetd这个super daemon。响应速度比较慢，但是可以通过super daemon额外提供一些管理，例如控制何时启动。配置文件放在<code>/etc/xinetd.d</code>当中。</li>
+</ul>
+<p>如果想要将系统上面的111端口关闭，需要进行这样的过程：<br><img src="https://s2.ax1x.com/2019/11/26/MzDfoD.png" alt="MzDfoD.png"></p>
+<h3 id="2-默认启动的服务"><a href="#2-默认启动的服务" class="headerlink" title="2.默认启动的服务"></a>2.默认启动的服务</h3><p>上述只能将某个当前的服务开启或者关闭，还需要控制它的开机自启，所以需要用到init和systemd这两个服务管理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list|grep sshd</span><br><span class="line">chkconfig --level 35 sshd off   关闭开机自启</span><br><span class="line">/etc/init.d/sshd stop           当前关闭</span><br></pre></td></tr></table></figure>
+<p>上述都是使用init这个比较落后的方式来管理系统的服务，现在多数采用systemd结合systemctl命令的方式来进行管理，非常简便，具体参考之前的博文——Linux基础学习笔记的系统服务。</p>
+<h1 id="SELinux管理原则"><a href="#SELinux管理原则" class="headerlink" title="SELinux管理原则"></a>SELinux管理原则</h1><p>SELinux使用所谓的委任式访问控制，可以针对特定的程序与特定的文件资源来进行权限的管理。即使你是root，那么在使用不同的程序时，你所取得的权限也不一定是root，需要视设定而定。</p>
+<p>暂且搁置…</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Gard3nia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://gardenia30.top/2019/11/25/Linux网络学习笔记-网络安全和主机基本防护/">https://gardenia30.top/2019/11/25/Linux网络学习笔记-网络安全和主机基本防护/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/11/22/Linux网络学习笔记-常用网络命令/"><span>Linux网络学习笔记-常用网络命令</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By Gard3nia</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Just keep moving!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
